@@ -1,0 +1,65 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Getting started with Cohort Query
+  termsOfService: 'https://example.com/terms/'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  x-logo:
+    url: 'prognos_logo_docs.png'
+  description: >
+    
+    # APIs End-Points
+
+    There are various APIs which can be utilized by Prognos FACTOR to access patient data. Primarily, there are three servers given below:
+
+      - il1.prognosfactor.com
+
+      - il2.prognosfactor.com
+
+      - il3.prognosfactor.com 
+
+
+    # cURL
+
+    The back end of the prognos Factor has been using cURL package to access the above given three API. The basic format is given below:
+   
+    # Overview
+
+    A cohort query will be used to access the patient data from the database using the Prognos FACTOR APIs endpoints. Patient data is accessed from the database using endpoint /query. 
+    
+    A cohort query consists of two major parts:
+    
+    - query: This part contains information related to the query that helps to fetch patient data under certain constraints.
+
+    - aggregate: This field can have various distinct values i.e., "count", "list", "groupby" and "first-match". Each of these values returns specific information related to patients that fulfill the constraints mentioned in the query.   
+
+    # Index
+   
+    - Aggregate
+
+    - Fetch Single Data 
+
+    - Fetch Multiple Data 
+
+    - Logic Queries
+
+    - Fetch by Demographics
+
+    - Event Queries
+
+    - Sequence Queries
+
+    - Misc
+    
+tags:
+  - name: APIs End-Points
+    description: There are various APIs which can be utilized by Prognos FACTOR to access patient data. Primarily, there are three servers given below
+    
+paths:
+  '/users/{username}':
+    $ref: 'paths\users@{username}.yaml'
+  /echo:
+    $ref: paths\CohorQueries.yaml
+
