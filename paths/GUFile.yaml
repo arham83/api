@@ -1,0 +1,45 @@
+get:
+  tags:
+    - Fetch File 
+  summary: Get User File 
+  description: 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                name: c-1628855501067-571.yaml
+                path: gopythonsoftware.com/hasaniqbal/c-1628855501067-571.yaml
+                sha: c9687be92d83d644d92bdd88f7a0f3bd9830bdd6
+                size: 416
+                url: >-
+                 https://api.github.com/repos/medivo/cohort-repo/contents/gopythonsoftware.com/hasaniqbal/c-1628855501067-571.yaml?ref=master
+                html_url: >-
+                 https://github.com/medivo/cohort-repo/blob/master/gopythonsoftware.com/hasaniqbal/c-1628855501067-571.yaml
+                git_url: >-
+                 https://api.github.com/repos/medivo/cohort-repo/git/blobs/c9687be92d83d644d92bdd88f7a0f3bd9830bdd6
+                download_url: >-
+                 https://raw.githubusercontent.com/medivo/cohort-repo/master/gopythonsoftware.com/hasaniqbal/c-1628855501067-571.yaml?token=AMOJ5B62TWHXFWSEIBKKHVTBEOIGQ
+                type: file
+                content: "c3RhcnQtZGF0ZTogMTQyMDA3MDQwMDAwMAplbmQtZGF0ZTogMTYyODU1MzYw\nMDAwMAplbGlnaWJpbGl0eS1zdGFydDogLTEKZWxpZ2liaWxpdHktZW5kOiAt\nMQpkYXRhLXNvdXJjZXM6IFtdCnBhdGllbnQtZmlsZTogJycKcHJvZmlsZS1u\nYW1lOiAnY29ob3J0IDEzMjMxJwpwcm9maWxlLWRlc2NyaXB0aW9uOiAnVGVz\ndCcKcHJvZmlsZS1jcmVhdG9yOiAnaGFzYW5pcWJhbEBnb3B5dGhvbnNvZnR3\nYXJlLmNvbScKcHJvZmlsZS1sYXN0LXVwZGF0ZWQ6ICcxNjI4ODU2NjE3Nzgx\nJwpwcm9maWxlLWRlZmluaXRpb246IHwtCiAgKCJTRVFVRU5DRSIKICAgIChI\nQVNfTVRSVAogICAgICAiQm9keSB3ZWlnaHQiCiAgICApCiAgICAoSEFTX01U\nUlQKICAgICAgIkJvZHkgd2VpZ2h0IgogICAgICAiQkVGT1JFIgogICAgICAx\nMAogICAgKQogICk=\n"
+                encoding: base64
+                _links: 
+                 self: "https://api.github.com/repos/medivo/cohort-repo/contents/gopythonsoftware.com/hasaniqbal/c-1628855501067-571.yaml?ref=master"
+                 git: "https://api.github.com/repos/medivo/cohort-repo/git/blobs/c9687be92d83d644d92bdd88f7a0f3bd9830bdd6"
+                 html: "https://github.com/medivo/cohort-repo/blob/master/gopythonsoftware.com/hasaniqbal/c-1628855501067-571.yaml"

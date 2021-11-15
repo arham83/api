@@ -1,0 +1,199 @@
+post:
+  tags:
+    - Aggregate
+  summary: Aggregate Sender
+  description: In case of sender the query will group the data based upon the particular sender, the return data will have<br>
+
+    <ol><li>SENDER Name </li>
+    <li>No. of patients provided by sender  </li>
+    <li>No. of records associated with sende</li></ol>  
+    Where senders represent the company having the data regarding different patients  
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 50864
+                counteligibility: 0
+                countlab: 0
+                countmed: 0
+                countrx: 0
+                sender:
+                  - 'n': Paean-MED
+                    p: 6683
+                    r: 609652
+                  - 'n': Paean-RX
+                    p: 10481
+                    r: 243176
+                  - 'n': Ability-MED-Closed
+                    p: 22392
+                    r: 5496040
+                  - 'n': Epione-RX
+                    p: 2
+                    r: 11
+                  - 'n': Poseidon
+                    p: 2445
+                    r: 145326
+                  - 'n': Zeus
+                    p: 40
+                    r: 336
+                  - 'n': Ares
+                    p: 992
+                    r: 2955
+                  - 'n': Eupheme
+                    p: 342
+                    r: 2148
+                  - 'n': Iaso-MED
+                    p: 9441
+                    r: 404057
+                  - 'n': Ability-RX-Closed
+                    p: 18558
+                    r: 522294
+                  - 'n': Athena
+                    p: 42619
+                    r: 3683600
+                  - 'n': Saturn
+                    p: 15873
+                    r: 1485214
+                  - 'n': Plutus
+                    p: 3027
+                    r: 59590
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.93µs
+                        bitmap-opt: 7895 of 52348262
+                        groupby-allocate: 3.807µs
+                        groupby-run: 67.155217ms
+                        query-assign-id: 2.109µs
+                        query-bitmap: 616.057µs
+                        query-opt: 968ns
+                        query-pop-cache: 21.375µs
+                        query-run: 14.658866ms
+                        req-assign-ids: 862ns
+                        token-trans: 599ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 35.044µs
+                        bitmap-opt: 8051 of 53875464
+                        groupby-allocate: 5.186µs
+                        groupby-run: 64.939875ms
+                        query-assign-id: 3.905µs
+                        query-bitmap: 669.333µs
+                        query-opt: 1.247µs
+                        query-pop-cache: 36.086µs
+                        query-run: 15.053251ms
+                        req-assign-ids: 2.141µs
+                        token-trans: 648ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 33.116µs
+                        bitmap-opt: 8606 of 56700766
+                        groupby-allocate: 4.554µs
+                        groupby-run: 64.028937ms
+                        query-assign-id: 3.685µs
+                        query-bitmap: 742.21µs
+                        query-opt: 1.215µs
+                        query-pop-cache: 36.455µs
+                        query-run: 15.964371ms
+                        req-assign-ids: 1.436µs
+                        token-trans: 640ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 35.126µs
+                        bitmap-opt: 8894 of 56689568
+                        groupby-allocate: 5.104µs
+                        groupby-run: 67.191481ms
+                        query-assign-id: 4.906µs
+                        query-bitmap: 793.209µs
+                        query-opt: 1.584µs
+                        query-pop-cache: 38.925µs
+                        query-run: 16.434023ms
+                        req-assign-ids: 1.805µs
+                        token-trans: 640ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.814µs
+                        bitmap-opt: 8653 of 56685649
+                        groupby-allocate: 5.801µs
+                        groupby-run: 65.445406ms
+                        query-assign-id: 3.43µs
+                        query-bitmap: 744.741µs
+                        query-opt: 1.067µs
+                        query-pop-cache: 35.043µs
+                        query-run: 15.883969ms
+                        req-assign-ids: 804ns
+                        token-trans: 632ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 35.347µs
+                        bitmap-opt: 8765 of 49511159
+                        groupby-allocate: 4.668µs
+                        groupby-run: 66.406996ms
+                        query-assign-id: 2.347µs
+                        query-bitmap: 679.739µs
+                        query-opt: 993ns
+                        query-pop-cache: 241.614µs
+                        req-assign-ids: 771ns
+                        token-trans: 607ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/senderARQ.yaml
+    description: Schema of Aggregate Sender API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+             "aggregate": "groupby",
+             "groupby": [
+                  "sender"
+                 ]
+        }'

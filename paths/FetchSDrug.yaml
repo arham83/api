@@ -1,0 +1,146 @@
+post:
+  tags:
+    - Fetch Single Data
+  summary: Fetch Single Drug
+  description: This query fetches data from Prognos FACTOR about patients who have been given a certain medication, which is provided in the query body.
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: calls per hour allowed by the user
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value: 
+                count: 166315
+                counteligibility: 343096
+                countlab: 12877677
+                countmed: 150664187
+                countrx: 37160957
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.666µs
+                        bitmap-opt: 59746 of 52348262
+                        query-assign-id: 11.421µs
+                        query-bitmap: 1.551079ms
+                        query-opt: 1.1µs
+                        query-pop-cache: 33.182µs
+                        query-resp: 11.305719ms
+                        query-run: 515.521317ms
+                        req-assign-ids: 656ns
+                        token-trans: 878ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.812µs
+                        bitmap-opt: 59111 of 53875464
+                        query-assign-id: 11.528µs
+                        query-bitmap: 1.766811ms
+                        query-opt: 1.198µs
+                        query-pop-cache: 40.057µs
+                        query-resp: 11.205225ms
+                        query-run: 497.468575ms
+                        req-assign-ids: 1.403µs
+                        token-trans: 632ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.463µs
+                        bitmap-opt: 59369 of 56700766
+                        query-assign-id: 10.806µs
+                        query-bitmap: 1.708714ms
+                        query-opt: 1.207µs
+                        query-pop-cache: 37.424µs
+                        query-resp: 42.244142ms
+                        query-run: 498.192822ms
+                        req-assign-ids: 1.157µs
+                        token-trans: 591ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 12.972µs
+                        bitmap-opt: 59345 of 56689568
+                        query-assign-id: 11.57µs
+                        query-bitmap: 1.661323ms
+                        query-opt: 1.206µs
+                        query-pop-cache: 37.563µs
+                        query-resp: 11.185207ms
+                        query-run: 491.291622ms
+                        req-assign-ids: 936ns
+                        token-trans: 599ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.265µs
+                        bitmap-opt: 58905 of 56685649
+                        query-assign-id: 21.784µs
+                        query-bitmap: 1.712437ms
+                        query-opt: 1.165µs
+                        query-pop-cache: 35.676µs
+                        query-resp: 10.70739ms
+                        query-run: 489.286331ms
+                        req-assign-ids: 2.06µs
+                        token-trans: 846ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.69µs
+                        bitmap-opt: 49101 of 49511159
+                        query-assign-id: 11.06µs
+                        query-bitmap: 1.598451ms
+                        query-opt: 1.362µs
+                        query-pop-cache: 37.981µs
+                        query-resp: 9.345969ms
+                        query-run: 518.544677ms
+                        req-assign-ids: 1.806µs
+                        token-trans: 648ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+              
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/FetchSDrugschema.yaml
+    description: Schema of Fetch Single Drug API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_RX",
+                "code": "HUMULIN R"
+                },
+            "aggregate": "count"
+        }'

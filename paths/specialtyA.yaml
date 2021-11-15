@@ -1,0 +1,185 @@
+post:
+  tags:
+    - Aggregate
+  summary:  Aggregate Specialty 
+  description: In case of specialty the query will aggregate the patients who are concerning a particular specialist, return data will have <br>
+
+    <ol><li>Specialty </li>
+    <li>Number of patients concerning that particular specialist</li>
+    <li>Number of record associated with them</li></ol>    
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 50864
+                counteligibility: 0
+                countlab: 0
+                countmed: 0
+                countrx: 0
+                specialty:
+                  - 'n': PATHOLOGY
+                    p: 10017
+                    r: 204523
+                  - 'n': AEROSPACE MEDICINE
+                    p: 23
+                    r: 184
+                  - 'n': SPORTS MEDICINE
+                    p: 579
+                    r: 4900
+                  - 'n': GYNECOLOGY ONCOLOGY
+                    p: 81
+                    r: 809
+                  - >- 
+                    .
+                  - >- 
+                    .
+                  - >- 
+                    .
+                  - 'n': ADDICTION MEDICINE
+                    p: 165
+                    r: 8294
+                  - 'n': RHEUMATOLOGY
+                    p: 604
+                    r: 33101
+                  - 'n': NEUROLOGY
+                    p: 1279
+                    r: 18494
+                  - 'n': SOCIAL WORK
+                    p: 23
+                    r: 676
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 41.592µs
+                        bitmap-opt: 7895 of 52348262
+                        groupby-allocate: 4.694µs
+                        groupby-run: 69.411747ms
+                        query-assign-id: 3.209µs
+                        query-bitmap: 608.155µs
+                        query-opt: 1.255µs
+                        query-pop-cache: 210.469µs
+                        req-assign-ids: 755ns
+                        token-trans: 624ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.485µs
+                        bitmap-opt: 8051 of 53875464
+                        groupby-allocate: 5.842µs
+                        groupby-run: 66.736194ms
+                        query-assign-id: 4.734µs
+                        query-bitmap: 739.1µs
+                        query-opt: 1.518µs
+                        query-pop-cache: 218.787µs
+                        req-assign-ids: 1.28µs
+                        token-trans: 599ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.412µs
+                        bitmap-opt: 8606 of 56700766
+                        groupby-allocate: 6.252µs
+                        groupby-run: 66.002555ms
+                        query-assign-id: 2.979µs
+                        query-bitmap: 687.317µs
+                        query-opt: 1.329µs
+                        query-pop-cache: 223.171µs
+                        req-assign-ids: 1.157µs
+                        token-trans: 574ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 49.764µs
+                        bitmap-opt: 8894 of 56689568
+                        groupby-allocate: 3.561µs
+                        groupby-run: 69.044686ms
+                        query-assign-id: 3.414µs
+                        query-bitmap: 769.587µs
+                        query-opt: 1.239µs
+                        query-pop-cache: 245.162µs
+                        req-assign-ids: 1.732µs
+                        token-trans: 640ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.814µs
+                        bitmap-opt: 8653 of 56685649
+                        groupby-allocate: 5.711µs
+                        groupby-run: 67.415285ms
+                        query-assign-id: 3.708µs
+                        query-bitmap: 715.054µs
+                        query-opt: 1.108µs
+                        query-pop-cache: 245.659µs
+                        req-assign-ids: 1.773µs
+                        token-trans: 788ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.813µs
+                        bitmap-opt: 8765 of 49511159
+                        groupby-allocate: 5.129µs
+                        groupby-run: 68.17227ms
+                        query-assign-id: 3.184µs
+                        query-bitmap: 619.794µs
+                        query-opt: 1.124µs
+                        query-pop-cache: 231.046µs
+                        req-assign-ids: 944ns
+                        token-trans: 911ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/specialtyARQ.yaml
+    description: Schema of  Aggregate Specialty API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+             "aggregate": "groupby",
+             "groupby": [
+                  "specialty"
+                 ]
+        }'

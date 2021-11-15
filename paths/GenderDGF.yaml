@@ -1,0 +1,147 @@
+post:
+  tags:
+    - Fetch by Demographics Data
+  summary: Gender Female
+  description: This query fetches only female patients data from Prognos FACTOR. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 176644175
+                counteligibility: 188838304
+                countlab: 7814857816
+                countmed: 19071841862
+                countrx: 4274186337
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.517µs
+                        bitmap-opt: 28257928 of 52348262
+                        query-assign-id: 8.828µs
+                        query-bitmap: 63.998448ms
+                        query-opt: 1.469µs
+                        query-pop-cache: 52.8µs
+                        query-resp: 2.691509443s
+                        query-run: 264.182709ms
+                        req-assign-ids: 2.708µs
+                        token-trans: 426ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 12.062µs
+                        bitmap-opt: 29151683 of 53875464
+                        query-assign-id: 8.557µs
+                        query-bitmap: 66.10604ms
+                        query-opt: 1.436µs
+                        query-pop-cache: 48.689µs
+                        query-resp: 2.76921856s
+                        query-run: 275.05719ms
+                        req-assign-ids: 2.404µs
+                        token-trans: 582ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.495µs
+                        bitmap-opt: 30771102 of 56700766
+                        query-assign-id: 5.112µs
+                        query-bitmap: 69.118733ms
+                        query-opt: 1.264µs
+                        query-pop-cache: 34.987µs
+                        query-resp: 2.714926449s
+                        query-run: 287.088454ms
+                        req-assign-ids: 2.043µs
+                        token-trans: 1.026µs
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.133µs
+                        bitmap-opt: 30764578 of 56689568
+                        query-assign-id: 8.747µs
+                        query-bitmap: 69.434505ms
+                        query-opt: 1.411µs
+                        query-pop-cache: 45.292µs
+                        query-resp: 2.902260902s
+                        query-run: 289.113602ms
+                        req-assign-ids: 2.535µs
+                        token-trans: 411ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.994µs
+                        bitmap-opt: 30769360 of 56685649
+                        query-assign-id: 6.236µs
+                        query-bitmap: 69.048455ms
+                        query-opt: 1.453µs
+                        query-pop-cache: 49.51µs
+                        query-resp: 3.162246087s
+                        query-run: 287.637225ms
+                        req-assign-ids: 2.166µs
+                        token-trans: 345ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 12.89µs
+                        bitmap-opt: 26929524 of 49511159
+                        query-assign-id: 5.465µs
+                        query-bitmap: 60.693861ms
+                        query-opt: 1.157µs
+                        query-pop-cache: 52.824µs
+                        query-resp: 2.486502663s
+                        query-run: 252.706926ms
+                        req-assign-ids: 2.346µs
+                        token-trans: 320ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GenderDGFRQ.yaml
+    description: Schema of Fetch Multiple Drug Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"GENDER_IS",
+                "string" : "F " 
+              },
+            "aggregate": "count"
+          }'

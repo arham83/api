@@ -1,0 +1,22 @@
+type: object
+properties:
+    query: 
+      type: object
+      description: This part contains information related to query that helps to fetch patient data under certain constraints.  
+      properties:
+          cmd:
+            type: string
+            description: This value for this key specify the clause that will be utilized to fetch a certain type of data. In case of `HAS_RX`, this value is used to list patients who have been given a certain medication or prescribed with certain medical treatment. 
+            example:
+              GENDER_IS
+          string:
+            type: string
+            description: The value for this key comprises of universal code, depending on the valve for the `cmd` key. For this request the value of `cmd` is `HAS_RX`, then the `code` key will have name of a medicine as value.
+            example:
+              M            
+    aggregate:
+      type: string
+      description: This is the return type of a given API request. In case of `count` the query returns the number of patients.
+      example:
+        count
+    

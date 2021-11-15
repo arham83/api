@@ -1,0 +1,215 @@
+post:
+  tags:
+    - Aggregate
+  summary: Aggregate Age/Gender 
+  description: In case of age-gender the query will aggregate the patients based upon their gender and age, the parent group will based upon the gender and the child group will be based upon age having <br>
+
+    <ol><li>Age </li>
+    <li>Number of patients of particular of this age </li>
+    <li>No of records</li></ol>  
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                F:
+                - 'n': '1929'
+                  p: 1
+                  r: 0
+                - 'n': '1943'
+                  p: 4
+                  r: 0
+                - 'n': '1967'
+                  p: 8
+                  r: 0
+                - 'n': '1957'
+                  p: 9
+                  r: 0
+                - >- 
+                  .
+                - >- 
+                  .
+                - >- 
+                  .
+                - 'n': '1979'
+                  p: 625
+                  r: 0
+                - 'n': '1925'
+                  p: 1
+                  r: 0
+                - 'n': '1990'
+                  p: 3018
+                  r: 0
+                - 'n': '1995'
+                  p: 2562
+                  r: 0
+              M:
+                - 'n': '2003'
+                  p: 1
+                  r: 0
+                - 'n': '1945'
+                  p: 4
+                  r: 0
+                - 'n': '1970'
+                  p: 2
+                  r: 0
+                - 'n': '1995'
+                  p: 4
+                  r: 0
+                - >- 
+                  .
+                - >- 
+                  .
+                - >- 
+                  .
+                - 'n': '1988'
+                  p: 6
+                  r: 0
+                - 'n': '1935'
+                  p: 4
+                  r: 0
+                - 'n': '1929'
+                  p: 1
+                  r: 0
+                - 'n': '1936'
+                  p: 2
+                  r: 0
+              count: 50864
+              counteligibility: 0
+              countlab: 0
+              countmed: 0
+              countrx: 0
+              stats:
+                node-count: 6
+                nodes:
+                  - node-designation: 1
+                    node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                    perf:
+                      acc-ctrl: 37.169µs
+                      bitmap-opt: 7895 of 52348262
+                      groupby-allocate: 18.789µs
+                      groupby-run: 944.729µs
+                      query-assign-id: 4.537µs
+                      query-bitmap: 630.203µs
+                      query-opt: 1.436µs
+                      query-pop-cache: 202.527µs
+                      req-assign-ids: 607ns
+                      token-trans: 615ns
+                    timestamp: 1629834763
+                    version: v1.8.0
+                  - node-designation: 2
+                    node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                    perf:
+                      acc-ctrl: 9.32µs
+                      bitmap-opt: 8051 of 53875464
+                      groupby-allocate: 19.15µs
+                      groupby-run: 969.365µs
+                      query-assign-id: 5.145µs
+                      query-bitmap: 741.152µs
+                      query-opt: 1.461µs
+                      query-pop-cache: 228.527µs
+                      req-assign-ids: 2.158µs
+                      token-trans: 607ns
+                    timestamp: 1629835002
+                    version: v1.8.0
+                  - node-designation: 3
+                    node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                    perf:
+                      acc-ctrl: 9.542µs
+                      bitmap-opt: 8606 of 56700766
+                      groupby-allocate: 15.663µs
+                      groupby-run: 1.049426ms
+                      query-assign-id: 4.201µs
+                      query-bitmap: 770.345µs
+                      query-opt: 1.181µs
+                      query-pop-cache: 258.125µs
+                      req-assign-ids: 1.534µs
+                      token-trans: 640ns
+                    timestamp: 1629835196
+                    version: v1.8.0
+                  - node-designation: 4
+                    node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                    perf:
+                      acc-ctrl: 9.083µs
+                      bitmap-opt: 8894 of 56689568
+                      groupby-allocate: 15.212µs
+                      groupby-run: 1.059434ms
+                      query-assign-id: 3.488µs
+                      query-bitmap: 777.422µs
+                      query-opt: 1.116µs
+                      query-pop-cache: 259.521µs
+                      req-assign-ids: 1.51µs
+                      token-trans: 608ns
+                    timestamp: 1629835044
+                    version: v1.8.0
+                  - node-designation: 5
+                    node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                    perf:
+                      acc-ctrl: 9.772µs
+                      bitmap-opt: 8653 of 56685649
+                      groupby-allocate: 18.059µs
+                      groupby-run: 1.062244ms
+                      query-assign-id: 2.904µs
+                      query-bitmap: 779.079µs
+                      query-opt: 1.099µs
+                      query-pop-cache: 230.333µs
+                      req-assign-ids: 812ns
+                      token-trans: 845ns
+                    timestamp: 1629835473
+                    version: v1.8.0
+                  - node-designation: 6
+                    node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                    perf:
+                      acc-ctrl: 10.117µs
+                      bitmap-opt: 8765 of 49511159
+                      groupby-allocate: 14.498µs
+                      groupby-run: 1.024721ms
+                      query-assign-id: 2.986µs
+                      query-bitmap: 611.104µs
+                      query-opt: 1.345µs
+                      query-pop-cache: 230.209µs
+                      req-assign-ids: 591ns
+                      token-trans: 870ns
+                    timestamp: 1629833269
+                    version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/age_genderARQ.yaml
+    description: Schema of Aggregate Age/Gender API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+             "aggregate": "groupby",
+             "groupby": [
+                  "sender"
+                 ]
+        }'

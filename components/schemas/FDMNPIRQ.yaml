@@ -1,0 +1,22 @@
+type: object
+properties:
+    npi: 
+      type: object
+      description: This part contains information related to patient history with repect to their `npi` (National Provider Identifier).  
+      example:
+         - '1649375759'
+         - '1871745042'
+         - '1588618490'
+         - '1013916428'
+         - '1982121422'
+         - '1114230323'
+         - '1679704597'
+         - '1265428874'
+         - '1841239423'
+         - '1275799801'
+         - '1376514265'
+         - '1497987440'
+         - '1396736690'
+         
+
+     

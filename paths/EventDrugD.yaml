@@ -1,0 +1,170 @@
+post:
+  tags:
+    - Event
+  summary: Event Drug Data
+  description: This query fetches data from Prognos FACTOR about patients who have been given prescribed to take multiple medicine for the index event within all the history of registry or within the date range, which is specified in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 115213
+                counteligibility: 308194
+                countlab: 8300805
+                countmed: 126515551
+                countrx: 23747730
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 38.031µs
+                        bitmap-opt: 57835 of 49127181
+                        query-assign-id: 20.086µs
+                        query-bitmap: 1.910767ms
+                        query-opt: 1.591µs
+                        query-pop-cache: 40.139µs
+                        query-resp: 8.984063ms
+                        query-run: 661.175724ms
+                        req-assign-ids: 344ns
+                        token-trans: 648ns
+                      timestamp: 1631079805
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.32µs
+                        bitmap-opt: 57082 of 50451494
+                        query-assign-id: 19.266µs
+                        query-bitmap: 1.965946ms
+                        query-opt: 1.28µs
+                        query-pop-cache: 54.26µs
+                        query-resp: 9.596124ms
+                        query-run: 642.599955ms
+                        req-assign-ids: 287ns
+                        token-trans: 640ns
+                      timestamp: 1631080005
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.403µs
+                        bitmap-opt: 57401 of 53153326
+                        query-assign-id: 18.24µs
+                        query-bitmap: 1.922613ms
+                        query-opt: 1.288µs
+                        query-pop-cache: 36.045µs
+                        query-resp: 9.274461ms
+                        query-run: 648.115981ms
+                        req-assign-ids: 336ns
+                        token-trans: 623ns
+                      timestamp: 1631079894
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.739µs
+                        bitmap-opt: 57283 of 53142944
+                        query-assign-id: 21.014µs
+                        query-bitmap: 2.082296ms
+                        query-opt: 1.231µs
+                        query-pop-cache: 40.813µs
+                        query-resp: 9.316024ms
+                        query-run: 639.176205ms
+                        req-assign-ids: 345ns
+                        token-trans: 657ns
+                      timestamp: 1631079961
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.411µs
+                        bitmap-opt: 56972 of 53134825
+                        query-assign-id: 31.902µs
+                        query-bitmap: 2.171213ms
+                        query-opt: 1.773µs
+                        query-pop-cache: 47.597µs
+                        query-resp: 9.086647ms
+                        query-run: 636.08185ms
+                        req-assign-ids: 501ns
+                        token-trans: 624ns
+                      timestamp: 1631080132
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.356µs
+                        bitmap-opt: 47705 of 46697635
+                        query-assign-id: 35.364µs
+                        query-bitmap: 1.672762ms
+                        query-opt: 1.28µs
+                        query-pop-cache: 54.153µs
+                        query-resp: 7.437239ms
+                        query-run: 676.240634ms
+                        req-assign-ids: 336ns
+                        token-trans: 623ns
+                      timestamp: 1631078480
+                      version: v1.8.0
+               
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EventDrugDRQ.yaml
+    description: Schema of Event Drug Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+          "query":{ 
+                "cmd": "EVENT", 
+                "args":[
+                  {
+                       "cmd": "HAS_RX",
+                       "position": "all", 
+                       "codes": [
+                                 "HUMULIN R"
+                                 "MUST"
+                          ]
+                   },
+                   {
+                        "cmd": "INCLUDE", 
+                         "args": [
+                           {
+                                 "cmd": "HAS_RX",
+                                 "position": "all",
+                                 "codes": [
+                                           "NOVOLIN R"
+                                           "MUST,-30,30"
+                                    ]
+                            } 
+                         ],
+                       "start": -30,
+                       "end": 30
+                    }
+                  ]        
+          },  
+          "aggregate": "count"
+        }'

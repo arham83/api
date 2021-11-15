@@ -1,0 +1,28 @@
+get:
+  tags:
+    - Fetch File 
+  summary: Get Shared File 
+  description: 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                message: "'https://api.github.com/repos/medivo/cohort-repo/contents/8bb27f5acd1e44f98df5f58a8f6acaa3/shared/c-1628855501067-571.yaml' not found."
+                state: NOTFOUND

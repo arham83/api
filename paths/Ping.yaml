@@ -1,0 +1,50 @@
+post:
+  tags:
+    - Ping
+  summary: Ping
+  description: This query fetches data from source link of Factor Logic Data.
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                reply: pong
+                timestamp: 1628757925
+                version: v1.6.6
+                session: ant-a4460153
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/PingRQ.yaml
+    description: Schema of Ping API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+
+            ""data":1629374033693"
+            }
+         '

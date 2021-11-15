@@ -1,0 +1,7 @@
+type: apiKey
+in: header
+name: Authorization
+description: >
+  Authorization Token can be obtained from the following website:
+    
+  https://dev.prognosfactor.com/cohort/query

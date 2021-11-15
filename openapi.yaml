@@ -1,0 +1,471 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Prognos FACTOR Logic REST API
+  termsOfService: 'https://example.com/terms/'
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+  x-logo:
+    url: 'prognos_logo_docs.png'
+  description: |
+    # APIs End-Points
+      The touchpoints of communication between an API and another system are referred to as endpoints. For APIs, an endpoint can include a URL of a server or service. Each endpoint is a location where APIs can have have access to the resources need to carry out their function. There are various APIs which can be utilized by Prognos FACTOR to access patient data. Primarily, there are three servers given below:
+
+      - il1.prognosfactor.com
+
+      - il2.prognosfactor.com
+
+      - il3.prognosfactor.com
+
+    # cURL
+      The back end of the prognos Factor has been using cURL package to access the aforementioned three API. The basic format of a cURL command is given as follow:
+
+      ``` shell
+      curl --location --request POST 'il1.prognosfactor.com/query' \
+      --header 'Authorization: <AUTH TOKEN>' \ 
+      --header 'Content-Type: application/json' \ 
+      --data-raw '{}'
+
+      ```
+
+      The query is written using *--data-raw* flag.
+
+      <style type="text/css">
+      .tg  {border-collapse:collapse;border-spacing:0;}
+      .tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+        overflow:hidden;padding:10px 5px;word-break:normal;}
+      .tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+        font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+      .tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}
+      .tg .tg-0lax{text-align:left;vertical-align:top}
+      </style>
+      <table class="tg" style="undefined;table-layout: fixed; width: 1123px">
+      <colgroup>
+      <col style="width: 121px">
+      <col style="width: 580px">
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="tg-1wig">Flag</th>
+          <th class="tg-1wig">Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-0lax">--location</td>
+          <td class="tg-0lax">It will revert you back to the specified end point if any redirects take place. Moreover, if authentication is used, curl will only send its credentials to the initial host, so if a redirect takes curl to a different host, it won't intercept the username and password.</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">--request</td>
+          <td class="tg-0lax">Specifies a custom request to use when communicating with the HTTP server or the endpoint. i.e. we want to make a POST request or a GET request.</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">--header</td>
+          <td class="tg-0lax">This flag has been used to pass you query</td>
+        </tr>
+        <tr>
+          <td class="tg-0lax">--data-raw</td>
+          <td class="tg-0lax">To pass multiple headers in a curl request, like in our case we are passing the Authorization and content type.<br>Authorization can be obtained from https://dev.prognosfactor.com/cohort/query <br>Where, content type is the format of our response request.</td>
+        </tr>
+      </tbody>
+      </table>
+    
+    # Fetch Factor Logic Data
+    Cohort query will be used to access the patient data from database using the Prognos FACTOR APIs endpoints. Patient data is accessed from the database using end point `/query`. A cohort query consists of two major part:
+
+      - `query`: This part contains information related to query that helps to fetch patient data under certain constraints.
+
+      - `aggregate`: This field can have various distinct values i.e., `"count"`, `"list"`, `"groupby"` and `"firstmatch"`. Each of these values return specific information related to patients that fulfil the constraints mentioned in `query`.
+    
+    # 
+
+#externalDocs:
+#  description: Find out how to create a GitHub repo for your OpenAPI definition.
+#  url: 'https://github.com/Rebilly/generator-openapi-repo'
+tags:  
+  - name: Fetch Single Data
+    description: >
+      These API requests belong to Fetch Factor Logic Data queries and are used to fetch data related to different patients with respect to a single instance related to an attribute i.e., a lab test, an International Disease Code (ICD), a Drug, a procedure or specialty of a provider. The generic format for Fetch Single Data requests is given as follow:
+
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "string", 
+                "code":/"test"/"provspec": " " 
+          },
+          "aggregate": "count"/"list"/"groupby"/"firstmatch"
+      }
+      
+      ```
+  - name: Aggregate
+    description: >
+     An aggregate query is a method of the deriving group and sub-group data by analysis of a set of individual data entries. Our API response has been governed by the Aggregate Clause. The generic Format for aggregation is given as follow:
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "", 
+                "test"/"code": "" 
+          },
+          "aggregate": "count"/"list"/"firstmatch"
+      }
+      
+      ```
+
+      The Generic Format for aggregate group-by is given as follow:
+
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "", 
+                "test"/"code": "" 
+          },
+          "aggregate": "groupby",
+          "groupby": [
+               "labtest"/"sender"/"age-gender"/"specialty"/"state"
+           ]
+      }
+      
+      ``` 
+      These queries return the response of different queries based on the distinct values that `aggregate` key can hold i.e.,`list`, `"firstmatch`, `sender`, `labtest`, `age-gender`,`speciality` and `state`.
+
+  - name: Logic
+    description: >
+      These queries fetch data related to different patients with respect to multiple instances of an attribute. These queries can have multiple lab tests, multiple International Disease Codes (ICD), multiple Drugs, multiple procedures, and multiple providers as instances for a given respective attribute. The generic format for the Fetch Multiple Data query is given as follow.
+  
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "", 
+                "args": [] 
+          },
+          "aggregate": "count"/"list"/"groupby"/"firstmatch"
+      }
+      
+      ``` 
+  - name: Fetch Multiple Data
+    description: >
+      These API requests belong to Fetch Factor Logic Data queries and are used to fetch data related to different patients with respect to a single instance related to an attribute i.e., a lab test, an International Disease Code (ICD), a Drug, a procedure or specialty of a provider. The generic format for Fetch Single Data requests is given as follow:
+
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "AND", 
+                "args":[
+                  {
+                       "cmd": " ", 
+                       "code"/"test"/"provspec": " " 
+                  },
+                  {
+                        "cmd": " ", 
+                        "code"/"test"/"provspec" : " " 
+         } 
+          },
+          "aggregate": "count"/"list"/"groupby"/"firstmatch"
+      }
+      
+      ```    
+  - name: Fetch by Demographics Data
+    description: >
+      The generic format for the  Demographics Data query is given as follow
+      
+      ``` json
+
+      {
+        "query":{ 
+           "cmd": " ", 
+           "string"/"op" : " " 
+        },
+        "aggregate": "count"
+      }
+      
+      ```   
+  - name: Event 
+    description: >
+      Event queries allow the user to define an index event along with a set of must-have and must-not-have events, each of which are constrained to the index event with relative days where the index event is assumed to be day zero. The generic format for Event Data query is
+     
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "EVENT", 
+                "args":[
+                  {
+                       "cmd": " ",
+                       "position": "", 
+                       "code"/"test"/"provspec":[]
+                   },
+                   {
+                        "cmd": "INCLUDE", 
+                         "args": [
+                           {
+                                 "cmd": "",
+                                 "position": "",
+                                 "codes":""
+                            } 
+                         ],
+                       "start":,
+                       "end":
+                   }
+                 ]        
+          },
+          "aggregate": "count"
+      }
+      
+      ```     
+  - name: SEQUENCE 
+    description: >
+      The sequence query that lets the user explore the existence of a sequence of events in the patients’ history. Within a sequence query, predicates can be time constrained relative to the occurrence of previous events.The generic format for Sequence Data query is
+     
+      ``` json
+
+      {
+          "query":{ 
+                "cmd": "", 
+                "args":[
+                  {
+                       "cmd": " ",
+                       "position": "", 
+                       "code"/"test"/"provspec":[]
+                   },
+                   {
+                        "cmd": "INCLUDE", 
+                        "position": "",
+                        "test": "",
+                        "timerelation": "",   
+                        "timedays": 
+          },
+          "aggregate": "count"
+      }
+      
+      ```
+  - name: Miscellaneous
+    description: >
+      These API requests fetch different lists of yaml files from cohort repository on GitHub. The yaml files contains respective cohorts which can be converted into specific JSON requests. These requests are further used to fetch patient data as specified in the query body of JSON.     
+  - name: Fetch File List 
+    description: >
+      These API requests fetch different lists of yaml files from cohort repository on GitHub. The yaml files contains respective cohorts which can be converted into specific JSON requests. These requests are further used to fetch patient data as specified in the query body of JSON. 
+  - name: Fetch File 
+    description: >
+      These API requests fetch a single yaml file related to a specified entity from the cohort repository on GitHub. Each yaml file is the source of a specific JSON request, which can be utilized to fetch patent data from factor logic.    
+  - name: Create/Update File 
+    description: >
+      These API requests create and update yaml file from the cohort repository on GitHub. Each yaml file is the source of a specific JSON request, which can be utilized to fetch patent data from factor logic.    
+  - name: Delete File 
+    description: >
+     These API requests delete yaml files from the cohort repository on GitHub. Each yaml file is the source of a specific JSON request, which can be utilized to fetch patent data from factor logic.    
+  - name: Ping 
+    description: >
+     These API requests source data from Factor Logic Data.   
+
+  - name: Patient History 
+    description: >
+     These API requests belong to Fetch Factor Logic Data queries and are used to fetch data related to different patients history with respect to their npi (National Provider Identifier).
+
+  - name: NPI Data 
+    description: >
+     These API requests belong to Fetch Factor Logic Data queries and are used to fetch data related to different patients history with respect to their npi (National Provider Identifier).
+  - name: Export Patients Data (Local CSV) 
+    description: >
+     These API requests belong to Fetch Factor Logic Data queries and are used to fetch data related to different patients in `CSV` file which we download into your local system.
+  - name: Export Patients Data (S3) 
+    description: >
+     These API requests belong to Fetch Factor Logic Data queries and are used to fetch data related to different patients in `S3` Bucket file which we download into your local system.
+  - name: Terms and Conditions  
+    description: >
+     These API requests Terms and Conditions of all data fetched from Prognos FACTOR Logic Data.
+  - name: Uncategorized 
+    description: >
+     These are whose API requests which used in Prognos FACTOR Logic Data but did not categorized in any case.
+
+x-tagGroups:
+  - name: Fetch Factor Logic Data
+    tags:
+      - Fetch Single Data
+      - Aggregate
+      - Logic
+      - Fetch Multiple Data
+      - Fetch by Demographics Data
+      - Event 
+      - SEQUENCE 
+      - Miscellaneous  
+  - name: GitHub API 
+    tags:
+      - Fetch File List
+      - Fetch File
+      - Create/Update File
+      - Delete File      
+  - name: Ping
+    tags:
+      - Ping
+  - name: Patient History
+    tags:
+      - Patient History 
+  - name: NPI Data
+    tags:
+      - NPI Data
+  - name: Export Patients Data (Local CSV)
+    tags:
+      - Export Patients Data (Local CSV)
+  - name: Export Patients Data (S3)
+    tags:
+      - Export Patients Data (S3)  
+  - name: Terms and Conditions
+    tags:
+      - Terms and Conditions  
+  - name: Uncategorized
+    tags:
+      - Uncategorized  
+      
+     
+
+
+servers:
+  - url: 'https://il1.prognosfactor.com'
+  - url: 'https://il1.prognosfactor.com'
+  - url: 'https://il1.prognosfactor.com'
+  - url: 'https://api.prognosfactor.com/cohorts/v2/user/'
+  
+paths:
+  /query: 
+    $ref: paths\FetchSLT.yaml
+  /query‎:
+    $ref: paths\FetchSD.yaml
+  /query‎‎:
+    $ref: paths\FetchSDrug.yaml
+  /query‎‎‎:
+    $ref: paths\FetchSP.yaml
+  /query‎‎‎‎:
+    $ref: paths\FetchSPS.yaml
+  /query‎‎‎‎1:
+    $ref: paths\Token4sA.yaml
+  /query2:
+    $ref: paths\firstmatch.yaml
+  /query3:
+    $ref: paths\SenderA.yaml     
+  /query4:
+    $ref: paths\labtestA.yaml
+  /query5:
+    $ref: paths\age_genderA.yaml
+  /query6:
+    $ref: paths\specialtyA.yaml
+  /query7:
+    $ref: paths\stateA.yaml
+  /query8:
+    $ref: paths\ORLogic.yaml
+  /query9:
+    $ref: paths\ANDLogic.yaml   
+  /query10:
+    $ref: paths\MultiLTD.yaml     
+  /query11:
+    $ref: paths\MultiDD.yaml   
+  /query12:
+    $ref: paths\MultiDrugD.yaml    
+  /query13:
+    $ref: paths\MultiPD.yaml     
+  /query14:
+    $ref: paths\MultiPSD.yaml    
+  /query15:
+    $ref: paths\GenderDG.yaml    
+  /query16:
+    $ref: paths\GenderDGF.yaml        
+  /query17:
+    $ref: paths\StateDG.yaml     
+  /query18:
+    $ref: paths\AgeDG.yaml  
+  /query19:  
+    $ref: paths\EventLTD.yaml     
+  /query20:  
+    $ref: paths\EventDD.yaml   
+  /query21:  
+    $ref: paths\EventDrugD.yaml
+  /query22:  
+    $ref: paths\SequenceLTD.yaml  
+  /query23:  
+    $ref: paths\SequenceDD.yaml  
+  /query24:  
+    $ref: paths\SequenceDrugD.yaml  
+  /query25:  
+    $ref: paths\NPIA.yaml  
+  /query26:  
+    $ref: paths\DrugA.yaml  
+  /query27:  
+    $ref: paths\DrugwithbucketA.yaml 
+  /query28:  
+    $ref: paths\ICDA.yaml 
+  /query29:  
+    $ref: paths\TrendA.yaml 
+  /query30:  
+    $ref: paths\FUFList.yaml
+  /query31:  
+    $ref: paths\FSFList.yaml
+  /query32:  
+    $ref: paths\FOFList.yaml
+  /query33:  
+    $ref: paths\GUFile.yaml
+  /query34:  
+    $ref: paths\GSFile.yaml
+  /query35:  
+    $ref: paths\GOFile.yaml
+  /query36:  
+    $ref: paths\UCFile.yaml
+  /query37:  
+    $ref: paths\DelFile.yaml
+  /query38:  
+    $ref: paths\SequencePD.yaml 
+  /query39:  
+    $ref: paths\SequencePSD.yaml   
+  /query40:  
+    $ref: paths\Misc.yaml   
+  /query41:
+    $ref: paths\Ping.yaml   
+  /query42:
+    $ref: paths\history.yaml  
+  /query43:
+    $ref: paths\FDNPI.yaml  
+  /query44:
+    $ref: paths\FDMNPI.yaml  
+  /query45:
+    $ref: paths\GFL.yaml  
+  /query46:
+    $ref: paths\CFS.yaml  
+  /query47:
+    $ref: paths\DCSV.yaml  
+  /query48:
+    $ref: paths\GFLS3.yaml  
+  /query49:
+    $ref: paths\CFSS3.yaml  
+  /query50:
+    $ref: paths\DCSVS3.yaml  
+  /query51:
+    $ref: paths\ETS3.yaml  
+  /query52:
+    $ref: paths\TC.yaml  
+  /query53:
+    $ref: paths\GE.yaml  
+  /query54:
+    $ref: paths\Ficd.yaml  
+  /query55:
+    $ref: paths\Fmtrt.yaml  
+  /query56:
+    $ref: paths\FmtrtTG.yaml  
+  /query57:
+    $ref: paths\Fcpt.yaml  
+  /query58:
+    $ref: paths\Fhcpcs.yaml  
+  /query59:
+    $ref: paths\Ficd10.yaml  
+   
+components:                                                                                                                                                                                                                              
+  securitySchemes:
+      Authorization Token:
+        $ref: components\securitySchemes\auth_token.yaml
+
+
+
+

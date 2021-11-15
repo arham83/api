@@ -1,0 +1,166 @@
+post:
+  tags:
+    - Event
+  summary: Event Diagnostic Data (ICD)
+  description: This query fetches data from Prognos FACTOR about patients who are suffering from multiple diseases in the index event within date range, which are specified by the ICD-10 code in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 124892
+                counteligibility: 85839
+                countlab: 3348273
+                countmed: 21137714
+                countrx: 2069934
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 39.131µs
+                        bitmap-opt: 20439 of 49127181
+                        query-assign-id: 13.349µs
+                        query-bitmap: 1.833417ms
+                        query-opt: 1.608µs
+                        query-pop-cache: 38.63µs
+                        query-resp: 6.362676ms
+                        query-run: 369.745085ms
+                        req-assign-ids: 615ns
+                        token-trans: 615ns
+                      timestamp: 1631079805
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 52.84µs
+                        bitmap-opt: 20311 of 50451494
+                        query-assign-id: 15.983µs
+                        query-bitmap: 1.749859ms
+                        query-opt: 1.649µs
+                        query-pop-cache: 49.886µs
+                        query-resp: 5.494587ms
+                        query-run: 358.093518ms
+                        req-assign-ids: 279ns
+                        token-trans: 665ns
+                      timestamp: 1631080005
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 39.934µs
+                        bitmap-opt: 21909 of 53153326
+                        query-assign-id: 16.697µs
+                        query-bitmap: 1.93469ms
+                        query-opt: 1.699µs
+                        query-pop-cache: 52.242µs
+                        query-resp: 5.539169ms
+                        query-run: 360.41362ms
+                        req-assign-ids: 287ns
+                        token-trans: 640ns
+                      timestamp: 1631079894
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 53.268µs
+                        bitmap-opt: 22294 of 53142944
+                        query-assign-id: 33.674µs
+                        query-bitmap: 1.863079ms
+                        query-opt: 1.419µs
+                        query-pop-cache: 48.492µs
+                        query-resp: 6.005236ms
+                        query-run: 359.365972ms
+                        req-assign-ids: 279ns
+                        token-trans: 607ns
+                      timestamp: 1631079961
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.371µs
+                        bitmap-opt: 21990 of 53134825
+                        query-assign-id: 18.117µs
+                        query-bitmap: 1.745805ms
+                        query-opt: 1.551µs
+                        query-pop-cache: 57.329µs
+                        query-resp: 7.057052ms
+                        query-run: 362.399349ms
+                        req-assign-ids: 336ns
+                        token-trans: 665ns
+                      timestamp: 1631080132
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 46.49µs
+                        bitmap-opt: 21330 of 46697635
+                        query-assign-id: 17.649µs
+                        query-bitmap: 1.714329ms
+                        query-opt: 1.395µs
+                        query-pop-cache: 53.653µs
+                        query-resp: 5.831807ms
+                        query-run: 330.92777ms
+                        req-assign-ids: 279ns
+                        token-trans: 648ns
+                      timestamp: 1631078480
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EventDDRQ.yaml
+    description: Schema of Event Diagnostic Data (ICD) API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+          "query":{ 
+                "cmd": "EVENT", 
+                "args":[
+                  {
+                       "cmd": "HAS_ICD10",
+                       "codes": [
+                                 "A000"
+                          ]
+                   },
+                   {
+                        "cmd": "EXCLUDE", 
+                         "args": [
+                           {
+                                 "cmd": "HAS_ICD10",
+                                 "codes": [
+                                           "A0100"
+                                    ]
+                            } 
+                         ],
+                       "start": -30,
+                       "end": 30
+                    }
+                  ]        
+          },  
+          "aggregate": "count"
+        }'

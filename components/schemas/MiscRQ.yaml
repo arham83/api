@@ -1,0 +1,8 @@
+type: object
+properties:
+    test: 
+      type: object
+      description: This part contains information related to query that helps to fetch patient data under certain constraints.  
+      example:
+        data
+     

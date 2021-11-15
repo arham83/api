@@ -1,0 +1,30 @@
+get:
+  tags:
+    - Fetch File List
+  summary: Fetch Shared File List 
+  description: This API requests fetch shared files list of all yaml files for multiple user from cohort repository.<br> 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                message: >-
+                  'https://api.github.com/repos/medivo/cohort-repo/contents/8bb27f5acd1e44f98df5f58a8f6acaa3/shared/'
+                   not found.
+                state: NOTFOUND

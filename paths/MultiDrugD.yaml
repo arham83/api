@@ -1,0 +1,156 @@
+post:
+  tags:
+    - Fetch Multiple Data
+  summary:  Fetch Multiple Drug Data 
+  description: This query fetches data from Prognos FACTOR about patients who have been given prescribed to take multiple medicine, which is specified in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 22773
+                counteligibility: 55963
+                countlab: 1680396
+                countmed: 25172989
+                countrx: 6802989
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-52-26-47-44.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 40.181µs
+                        bitmap-opt: 4570 of 51933245
+                        query-assign-id: 32.263µs
+                        query-bitmap: 2.745141ms
+                        query-opt: 4.8µs
+                        query-pop-cache: 27.519µs
+                        query-resp: 2.318789ms
+                        query-run: 399.551757ms
+                        req-assign-ids: 1.009µs
+                        token-trans: 697ns
+                      timestamp: 1631079805
+                      version: v1.9.0
+                    - node-designation: 2
+                      node-url: http://ec2-35-167-191-54.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 41.789µs
+                        bitmap-opt: 4524 of 53471835
+                        query-assign-id: 19.619µs
+                        query-bitmap: 2.654942ms
+                        query-opt: 4.849µs
+                        query-pop-cache: 37.801µs
+                        query-resp: 2.396317ms
+                        query-run: 402.253899ms
+                        req-assign-ids: 1.797µs
+                        token-trans: 722ns
+                      timestamp: 1631080005
+                      version: v1.9.0
+                    - node-designation: 3
+                      node-url: http://ec2-54-184-120-81.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 45.694µs
+                        bitmap-opt: 4512 of 56267453
+                        query-assign-id: 18.568µs
+                        query-bitmap: 2.577645ms
+                        query-opt: 5.021µs
+                        query-pop-cache: 37.998µs
+                        query-resp: 37.816096ms
+                        query-run: 614.307178ms
+                        req-assign-ids: 1.879µs
+                        token-trans: 722ns
+                      timestamp: 1631079894
+                      version: v1.9.0
+                    - node-designation: 4
+                      node-url: http://ec2-54-213-247-198.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 48.746µs
+                        bitmap-opt: 4627 of 56258159
+                        query-assign-id: 19.954µs
+                        query-bitmap: 2.639224ms
+                        query-opt: 5.112µs
+                        query-pop-cache: 38.753µs
+                        query-resp: 2.210067ms
+                        query-run: 415.287541ms
+                        req-assign-ids: 2.051µs
+                        token-trans: 722ns
+                      timestamp: 1631079961
+                      version: v1.9.0
+                    - node-designation: 5
+                      node-url: http://ec2-54-202-149-58.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 44.726µs
+                        bitmap-opt: 4506 of 56252356
+                        query-assign-id: 16.172µs
+                        query-bitmap: 2.46866ms
+                        query-opt: 4.546µs
+                        query-pop-cache: 37.842µs
+                        query-resp: 2.661093ms
+                        query-run: 406.687103ms
+                        req-assign-ids: 1.542µs
+                        token-trans: 673ns
+                      timestamp: 1631080132
+                      version: v1.9.0
+                    - node-designation: 6
+                      node-url: http://ec2-34-221-170-55.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 46.614µs
+                        bitmap-opt: 3746 of 49080594
+                        query-assign-id: 40.902µs
+                        query-bitmap: 2.287608ms
+                        query-opt: 3.224µs
+                        query-pop-cache: 35.512µs
+                        query-resp: 2.145512ms
+                        query-run: 341.013803ms
+                        req-assign-ids: 2.076µs
+                        token-trans: 722ns
+                      timestamp: 1631078480
+                      version: v1.9.0
+
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/MultiDrugDRQ.yaml
+    description: Schema of Fetch Multiple Drug Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"AND",
+                 "args":[
+                   {
+                       "cmd":"HAS_RX",
+                       "code": "HUMULIN R"
+                    },
+                    {
+                       "cmd":"HAS_RX",
+                       "code": "NOVOLIN R"
+                    }
+                        ]
+               },
+            "aggregate":"count"
+          }'

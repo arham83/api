@@ -1,0 +1,155 @@
+post:
+  tags:
+    - Fetch Multiple Data
+  summary:  Fetch Multiple Diagnostic (ICD) Data 
+  description: This query fetches data from Prognos FACTOR about patients who are suffering from multiple diseases, which are specified by the ICD-10 code in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 521
+                counteligibility: 1245
+                countlab: 35578
+                countmed: 448711
+                countrx: 53855
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-18-222-168-147.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.576µs
+                        bitmap-opt: 116 of 51986703
+                        query-assign-id: 17.944µs
+                        query-bitmap: 1.141315ms
+                        query-opt: 4.734µs
+                        query-pop-cache: 39.95µs
+                        query-resp: 179.51µs
+                        query-run: 8.276825ms
+                        req-assign-ids: 2.789µs
+                        token-trans: 632ns
+                      timestamp: 1631689017
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-18-118-200-140.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.353µs
+                        bitmap-opt: 106 of 53559225
+                        query-assign-id: 18.945µs
+                        query-bitmap: 1.147612ms
+                        query-opt: 4.981µs
+                        query-pop-cache: 41.518µs
+                        query-resp: 144.163µs
+                        query-run: 7.655573ms
+                        req-assign-ids: 1.682µs
+                        token-trans: 656ns
+                      timestamp: 1631689182
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-3-143-25-14.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.755µs
+                        bitmap-opt: 114 of 56394806
+                        query-assign-id: 16.238µs
+                        query-bitmap: 1.214988ms
+                        query-opt: 4.841µs
+                        query-pop-cache: 41.797µs
+                        query-resp: 232.958µs
+                        query-run: 62.621365ms
+                        req-assign-ids: 1.699µs
+                        token-trans: 649ns
+                      timestamp: 1631689152
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-21-43-238.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.741µs
+                        bitmap-opt: 109 of 56385394
+                        query-assign-id: 37.744µs
+                        query-bitmap: 1.163103ms
+                        query-opt: 5.489µs
+                        query-pop-cache: 43.159µs
+                        query-resp: 171.299µs
+                        query-run: 7.629809ms
+                        req-assign-ids: 1.813µs
+                        token-trans: 689ns
+                      timestamp: 1631689515
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-18-117-142-247.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.535µs
+                        bitmap-opt: 95 of 56378687
+                        query-assign-id: 18.437µs
+                        query-bitmap: 1.044689ms
+                        query-opt: 4.25µs
+                        query-pop-cache: 31.269µs
+                        query-resp: 149.013µs
+                        query-run: 7.054627ms
+                        req-assign-ids: 1.271µs
+                        token-trans: 599ns
+                      timestamp: 1631689217
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-52-14-31-151.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.035µs
+                        bitmap-opt: 108 of 49207840
+                        query-assign-id: 33.149µs
+                        query-bitmap: 1.0258ms
+                        query-opt: 4.029µs
+                        query-pop-cache: 41.993µs
+                        query-resp: 316.216µs
+                        query-run: 8.484249ms
+                        req-assign-ids: 1.846µs
+                        token-trans: 632ns
+                      timestamp: 1631687450
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/MultiDDRQ.yaml
+    description: Schema of Fetch Multiple Diagnostic (ICD) Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"AND",
+                 "args":[
+                   {
+                       "cmd":"HAS_ICD10",
+                       "code": "A000"
+                    },
+                    {
+                       "cmd":"HAS_MTRT",
+                       "code": "A001"
+                    }
+                        ]
+               },
+            "aggregate":"count"
+          }'

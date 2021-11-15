@@ -1,0 +1,147 @@
+post:
+  tags:
+    - Fetch Single Data
+  summary: Fetch Single Lab Test
+  description: This query fetch data from Prognos FACTOR about patients who have undergone only a single test, as specified in the query body.
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: calls per hour allowed by the user
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value: 
+                count: 50864
+                counteligibility: 66239
+                countlab: 5369472
+                countmed: 6500174
+                countrx: 764099
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.765µs
+                        bitmap-opt: 7895 of 52292693
+                        query-assign-id: 4.25µs
+                        query-bitmap: 612.126µs
+                        query-opt: 1.099µs
+                        query-pop-cache: 26.043µs
+                        query-resp: 1.263047ms
+                        query-run: 13.599629ms
+                        req-assign-ids: 1.206µs
+                        token-trans: 697ns
+                      timestamp: 1629505286
+                      version: v1.7.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 43.379µs
+                        bitmap-opt: 8051 of 53729006
+                        query-assign-id: 4.185µs
+                        query-bitmap: 671.614µs
+                        query-opt: 1.198µs
+                        query-pop-cache: 36.389µs
+                        query-resp: 1.433613ms
+                        query-run: 13.885983ms
+                        req-assign-ids: 1.116µs
+                        token-trans: 689ns
+                      timestamp: 1629505013
+                      version: v1.7.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 40.574µs
+                        bitmap-opt: 8606 of 56457193
+                        query-assign-id: 2.289µs
+                        query-bitmap: 745.22µs
+                        query-opt: 1.075µs
+                        query-pop-cache: 21.095µs
+                        query-resp: 1.238044ms
+                        query-run: 14.819226ms
+                        req-assign-ids: 681ns
+                        token-trans: 681ns
+                      timestamp: 1629507518
+                      version: v1.7.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 41.953µs
+                        bitmap-opt: 8894 of 56445644
+                        query-assign-id: 3.693µs
+                        query-bitmap: 706.112µs
+                        query-opt: 1.1µs
+                        query-pop-cache: 36.866µs
+                        query-resp: 1.189173ms
+                        query-run: 15.237123ms
+                        req-assign-ids: 1.756µs
+                        token-trans: 673ns
+                      timestamp: 1629507110
+                      version: v1.7.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 44.948µs
+                        bitmap-opt: 8653 of 56441863
+                        query-assign-id: 3.676µs
+                        query-bitmap: 666.539µs
+                        query-opt: 1.042µs
+                        query-pop-cache: 26.174µs
+                        query-resp: 1.177927ms
+                        query-run: 14.890954ms
+                        req-assign-ids: 935ns
+                        token-trans: 1.116µs
+                      timestamp: 1629507671
+                      version: v1.7.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 41.444µs
+                        bitmap-opt: 8765 of 49267486
+                        query-assign-id: 4.644µs
+                        query-bitmap: 610.284µs
+                        query-opt: 1.157µs
+                        query-pop-cache: 33.805µs
+                        query-resp: 1.214085ms
+                        query-run: 15.006326ms
+                        req-assign-ids: 1.829µs
+                        token-trans: 697ns
+                      timestamp: 1629502118
+                      version: v1.7.0
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/FetchSLTschema.yaml
+    description: Schema of Fetch Single Lab Test API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl \
+        --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH_TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+            "aggregate": "count"
+        }'

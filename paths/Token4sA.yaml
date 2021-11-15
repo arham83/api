@@ -1,0 +1,154 @@
+post:
+  tags:
+    - Aggregate
+  summary: Query Token4s
+  description: In case of list the query returns the patients data in the form of encoded lists, basically it will provide us a unique token for each patient termed as TOKEN4S
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                page: 1
+                pages: 11
+                patients:
+                  - >-
+                    Gz/iAc84rUQ5988JbnUbirlJtGyxXAHivGTVPkg33O4=-22ZYoIq4kWVtrUj/l4oyEB1j+VRaCT6DZSrJ9/iJOv8=
+                  - >-
+                    HREz/j+N+trTJ7JwQ+BExMG0SVtZFwPS+HExwax80EA=-OfRuRTpa5m4E+um/2bTV5ElwoWky8yklsJ93T9T5RI4=
+                  - >-
+                    .
+                  - >-
+                    .
+                  - >-
+                    .
+                  - >-
+                    9FcbIfxHfBwR5QbyWryve3TQUikeFq9WvWRDOxPJRUk=-lWE0Zdq2J95OXDruEHQpXqVoaI9KAWD/nbCVbU5tWtY=
+                  - >-
+                    9G03wDN+JbymX88YWxg6UMz8KheToB6HCLWdkxUur1M=-pJ5Luawe8WO37xTcosFJXECArs9UKpsY6ooUU/IZO3o=
+                  - >-
+                    9JBgmu3poqX4EZe0gxXFykIykal9z9HNxpt4pvN2EjI=-+XhSq8iLZRX8NBiXbLiW1QwhuL64+2CN9byryd5R28I=
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.534µs
+                        bitmap-opt: 7895 of 52348262
+                        query-assign-id: 2.06µs
+                        query-bitmap: 612.085µs
+                        query-opt: 1.641µs
+                        query-pop-cache: 227.684µs
+                        query-resp: 48.615µs
+                        req-assign-ids: 787ns
+                        token-trans: 779ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.64µs
+                        bitmap-opt: 8051 of 53875464
+                        query-assign-id: 2.83µs
+                        query-bitmap: 687.704µs
+                        query-opt: 1.304µs
+                        query-pop-cache: 226.417µs
+                        query-resp: 51.274µs
+                        req-assign-ids: 1.789µs
+                        token-trans: 501ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.648µs
+                        bitmap-opt: 8606 of 56700766
+                        query-assign-id: 4.603µs
+                        query-bitmap: 776.671µs
+                        query-opt: 1.46µs
+                        query-pop-cache: 236.094µs
+                        query-resp: 42.896µs
+                        req-assign-ids: 1.961µs
+                        token-trans: 402ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.756µs
+                        bitmap-opt: 8894 of 56689568
+                        query-assign-id: 4.209µs
+                        query-bitmap: 788.557µs
+                        query-opt: 1.362µs
+                        query-pop-cache: 251.964µs
+                        query-resp: 49.855µs
+                        req-assign-ids: 854ns
+                        token-trans: 665ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 7.902µs
+                        bitmap-opt: 8653 of 56685649
+                        query-assign-id: 3.824µs
+                        query-bitmap: 652.787µs
+                        query-opt: 968ns
+                        query-pop-cache: 234.082µs
+                        query-resp: 33.559µs
+                        req-assign-ids: 1.764µs
+                        token-trans: 427ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.484µs
+                        bitmap-opt: 8765 of 49511159
+                        query-assign-id: 3.708µs
+                        query-bitmap: 588.409µs
+                        query-opt: 1.206µs
+                        query-pop-cache: 236.699µs
+                        query-resp: 34.19µs
+                        req-assign-ids: 1.699µs
+                        token-trans: 427ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+                                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Token4sRQ.yaml
+    description: Schema of Fetch Single Diagnostic (ICD) API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+            "aggregate": "list"
+        }'

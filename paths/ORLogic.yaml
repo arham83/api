@@ -1,0 +1,155 @@
+post:
+  tags:
+    - Logic
+  summary:  OR Logic 
+  description: This query act as a logical OR over several sub-queries and fetches data about all the patients who satisfy any or all of the sub-queries contained in the argument body of main query. <br> 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 51096
+                counteligibility: 66446
+                countlab: 5414861
+                countmed: 6553565
+                countrx: 773044
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 12.021µs
+                        bitmap-opt: 7923 of 52348262
+                        query-assign-id: 6.876µs
+                        query-bitmap: 1.093127ms
+                        query-opt: 1.296µs
+                        query-pop-cache: 34.035µs
+                        query-resp: 1.127498ms
+                        query-run: 35.877646ms
+                        req-assign-ids: 525ns
+                        token-trans: 632ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.914µs
+                        bitmap-opt: 8095 of 53875464
+                        query-assign-id: 7.098µs
+                        query-bitmap: 1.087436ms
+                        query-opt: 1.354µs
+                        query-pop-cache: 45.021µs
+                        query-resp: 1.411395ms
+                        query-run: 36.670201ms
+                        req-assign-ids: 746ns
+                        token-trans: 624ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 12.315µs
+                        bitmap-opt: 8646 of 56700766
+                        query-assign-id: 5.481µs
+                        query-bitmap: 1.127128ms
+                        query-opt: 1.445µs
+                        query-pop-cache: 45.186µs
+                        query-resp: 1.148683ms
+                        query-run: 38.865298ms
+                        req-assign-ids: 640ns
+                        token-trans: 615ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.648µs
+                        bitmap-opt: 8934 of 56689568
+                        query-assign-id: 7.303µs
+                        query-bitmap: 3.399938ms
+                        query-opt: 1.592µs
+                        query-pop-cache: 46.524µs
+                        query-resp: 1.146646ms
+                        query-run: 40.438243ms
+                        req-assign-ids: 722ns
+                        token-trans: 845ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.069µs
+                        bitmap-opt: 8696 of 56685649
+                        query-assign-id: 7.245µs
+                        query-bitmap: 1.047211ms
+                        query-opt: 1.756µs
+                        query-pop-cache: 44.816µs
+                        query-resp: 1.208794ms
+                        query-run: 39.204984ms
+                        req-assign-ids: 878ns
+                        token-trans: 632ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.739µs
+                        bitmap-opt: 8802 of 49511159
+                        query-assign-id: 6.687µs
+                        query-bitmap: 3.50098ms
+                        query-opt: 1.214µs
+                        query-pop-cache: 49.682µs
+                        query-resp: 1.101552ms
+                        query-run: 39.668974ms
+                        req-assign-ids: 911ns
+                        token-trans: 624ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ORlogicRQ.yaml
+    description: Schema of OR Logic API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"OR",
+                 "args":[
+                   {
+                       "cmd":"HAS_MTRT",
+                       "test":"Body weight"
+                    },
+                    {
+                       "cmd":"HAS_MTRT",
+                       "test":"Ampicillin+Sulbactam [Susceptibility] by Minimum inhibitory concentration (MIC) "
+                    }
+                        ]
+               },
+            "aggregate":"count"
+          }'

@@ -1,0 +1,146 @@
+post:
+  tags:
+    - Fetch by Demographics Data
+  summary: State
+  description: This query fetches data from Prognos FACTOR about patients base in their state, in which they have lived. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 23290061
+                counteligibility: 21324900
+                countlab: 1081324377
+                countmed: 2326678315
+                countrx: 609013337
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 35.61µs
+                        bitmap-opt: 3697741 of 52408159
+                        query-assign-id: 5.366µs
+                        query-bitmap: 11.263206ms
+                        query-opt: 1.435µs
+                        query-pop-cache: 46.934µs
+                        query-resp: 440.863859ms
+                        query-run: 36.656981ms
+                        req-assign-ids: 1.821µs
+                        token-trans: 648ns
+                      timestamp: 1630477869
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 39.663µs
+                        bitmap-opt: 3824147 of 54002848
+                        query-assign-id: 5.596µs
+                        query-bitmap: 11.514402ms
+                        query-opt: 1.452µs
+                        query-pop-cache: 44.135µs
+                        query-resp: 434.205951ms
+                        query-run: 37.902627ms
+                        req-assign-ids: 2.174µs
+                        token-trans: 631ns
+                      timestamp: 1630478334
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 40.23µs
+                        bitmap-opt: 4060587 of 56901342
+                        query-assign-id: 4.496µs
+                        query-bitmap: 12.35191ms
+                        query-opt: 1.263µs
+                        query-pop-cache: 43.069µs
+                        query-resp: 473.747192ms
+                        query-run: 40.353192ms
+                        req-assign-ids: 2.191µs
+                        token-trans: 640ns
+                      timestamp: 1630478321
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 49.567µs
+                        bitmap-opt: 4058061 of 56890508
+                        query-assign-id: 5.637µs
+                        query-bitmap: 33.854248ms
+                        query-opt: 1.321µs
+                        query-pop-cache: 44.997µs
+                        query-resp: 472.444551ms
+                        query-run: 42.301395ms
+                        req-assign-ids: 2.568µs
+                        token-trans: 657ns
+                      timestamp: 1630478510
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 38.507µs
+                        bitmap-opt: 4056039 of 56886507
+                        query-assign-id: 5.046µs
+                        query-bitmap: 12.354513ms
+                        query-opt: 1.247µs
+                        query-pop-cache: 41.14µs
+                        query-resp: 459.167996ms
+                        query-run: 39.763785ms
+                        req-assign-ids: 2.134µs
+                        token-trans: 607ns
+                      timestamp: 1630478557
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 44.365µs
+                        bitmap-opt: 3593486 of 49712198
+                        query-assign-id: 4.562µs
+                        query-bitmap: 11.569582ms
+                        query-opt: 1.108µs
+                        query-pop-cache: 41.312µs
+                        query-resp: 454.603846ms
+                        query-run: 35.524844ms
+                        req-assign-ids: 1.863µs
+                        token-trans: 640ns
+                      timestamp: 1630476622
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/StateDGRQ.yaml
+    description: Schema of Fetch State Demographics Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"STATE_IS",
+                "string" : "NY " 
+              },
+            "aggregate": "count"
+          }'

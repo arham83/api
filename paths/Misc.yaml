@@ -1,0 +1,144 @@
+post:
+  tags:
+    - Miscellaneous
+  summary: Get Sources
+  description: This query fetches data from Prognos FACTOR about patients who have undergone lab tests for a sequence of an event within a date range, the earliest data range, the latest data range and within all history of a registry which is specified in the query body.
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 82845
+                counteligibility: 74262
+                countlab: 3472775
+                countmed: 20735912
+                countrx: 2756774
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.633µs
+                        bitmap-opt: 13690 of 52348262
+                        query-assign-id: 9.403µs
+                        query-bitmap: 1.419462ms
+                        query-opt: 1.157µs
+                        query-pop-cache: 30.088µs
+                        query-resp: 4.167505ms
+                        query-run: 195.959376ms
+                        req-assign-ids: 771ns
+                        token-trans: 599ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.199µs
+                        bitmap-opt: 13641 of 53875464
+                        query-assign-id: 9.378µs
+                        query-bitmap: 1.637451ms
+                        query-opt: 1.263µs
+                        query-pop-cache: 39.95µs
+                        query-resp: 4.051991ms
+                        query-run: 188.65705ms
+                        req-assign-ids: 1.731µs
+                        token-trans: 698ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.1µs
+                        bitmap-opt: 14552 of 56700766
+                        query-assign-id: 28.702µs
+                        query-bitmap: 1.757001ms
+                        query-opt: 1.272µs
+                        query-pop-cache: 45.316µs
+                        query-resp: 3.999654ms
+                        query-run: 287.686634ms
+                        req-assign-ids: 1.805µs
+                        token-trans: 665ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.075µs
+                        bitmap-opt: 14722 of 56689568
+                        query-assign-id: 10.257µs
+                        query-bitmap: 1.519661ms
+                        query-opt: 1.264µs
+                        query-pop-cache: 40.041µs
+                        query-resp: 3.936819ms
+                        query-run: 186.021181ms
+                        req-assign-ids: 1.346µs
+                        token-trans: 615ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.748µs
+                        bitmap-opt: 14540 of 56685649
+                        query-assign-id: 10.97µs
+                        query-bitmap: 1.52876ms
+                        query-opt: 1.28µs
+                        query-pop-cache: 36.824µs
+                        query-resp: 4.715606ms
+                        query-run: 186.453973ms
+                        req-assign-ids: 1.952µs
+                        token-trans: 615ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.181µs
+                        bitmap-opt: 13930 of 49511159
+                        query-assign-id: 9.223µs
+                        query-bitmap: 1.464995ms
+                        query-opt: 1.608µs
+                        query-pop-cache: 35.322µs
+                        query-resp: 3.949427ms
+                        query-run: 165.326925ms
+                        req-assign-ids: 1.55µs
+                        token-trans: 869ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/MiscRQ.yaml
+    description: Schema of Get Sources API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+
+            "test":"data"
+            }
+         '

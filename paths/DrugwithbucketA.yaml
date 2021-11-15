@@ -1,0 +1,219 @@
+post:
+  tags:
+    - Aggregate
+  summary: Aggregate Drug with Bucket 
+  description: In case of labtest the query will group by the patients based upon the all the lab test.<br> 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 50864
+                counteligibility: 0
+                countlab: 0
+                countmed: 0
+                countrx: 0
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 33.468µs
+                        bitmap-opt: 7895 of 52348262
+                        groupby-allocate: 16.057µs
+                        groupby-run: 28.491501ms
+                        query-assign-id: 4.201µs
+                        query-bitmap: 613.415µs
+                        query-opt: 1.001µs
+                        query-pop-cache: 212.931µs
+                        req-assign-ids: 763ns
+                        token-trans: 632ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.453µs
+                        bitmap-opt: 8051 of 53875464
+                        groupby-allocate: 18.059µs
+                        groupby-run: 29.257487ms
+                        query-assign-id: 4.258µs
+                        query-bitmap: 694.358µs
+                        query-opt: 1.338µs
+                        query-pop-cache: 224.826µs
+                        req-assign-ids: 1.477µs
+                        token-trans: 722ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 32.804µs
+                        bitmap-opt: 8606 of 56700766
+                        groupby-allocate: 15.344µs
+                        groupby-run: 30.798472ms
+                        query-assign-id: 4.078µs
+                        query-bitmap: 730.977µs
+                        query-opt: 1.297µs
+                        query-pop-cache: 254.851µs
+                        req-assign-ids: 1.879µs
+                        token-trans: 878ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.601µs
+                        bitmap-opt: 8894 of 56689568
+                        groupby-allocate: 15.671µs
+                        groupby-run: 31.769365ms
+                        query-assign-id: 4.053µs
+                        query-bitmap: 838.551µs
+                        query-opt: 1.403µs
+                        query-pop-cache: 257.7µs
+                        req-assign-ids: 2.084µs
+                        token-trans: 648ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 35.381µs
+                        bitmap-opt: 8653 of 56685649
+                        groupby-allocate: 16.697µs
+                        groupby-run: 30.932683ms
+                        query-assign-id: 3.594µs
+                        query-bitmap: 684.401µs
+                        query-opt: 1.436µs
+                        query-pop-cache: 247.506µs
+                        req-assign-ids: 1.788µs
+                        token-trans: 656ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 33.78µs
+                        bitmap-opt: 8765 of 49511159
+                        groupby-allocate: 16.222µs
+                        groupby-run: 31.243917ms
+                        query-assign-id: 4.529µs
+                        query-bitmap: 631.378µs
+                        query-opt: 1.469µs
+                        query-pop-cache: 243.78µs
+                        req-assign-ids: 1.166µs
+                        token-trans: 648ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+                test:
+                  - 'n': Common Pigweed IgE Ab RAST class [Presence] in Serum
+                    p: 24
+                    r: 27
+                  - 'n': Eosinophils/100 leukocytes in Urine sediment by Manual count
+                    p: 3
+                    r: 3
+                  - >- 
+                    . 
+                  - >- 
+                    . 
+                  - >- 
+                    . 
+                  - 'n': Leukocytes+Platelets [Morphology] in Blood
+                    p: 2
+                    r: 3
+                  - 'n': Alpha linolenate (C18:3w3) [Moles/volume] in Serum or Plasma
+                    p: 1
+                    r: 1
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/DrugwithbucketARQ.yaml
+    description: Schema of Aggregate Drug with bucket API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+             "aggregate": "groupby",
+             "groupby": [
+                  "drug"
+                 ]
+              "buckets": [
+                  {
+                     "name": "L03",
+                     "values": [
+                     "FILGRASTIM",
+                     "GRANIX",
+                     "NEUPOGEN",
+                     "NIVESTYM",
+                     "ZARXIO",
+                     "LEUKINE",
+                     "SARGRAMOSTIM",
+                     "FULPHILA",
+                     "NEULASTA",
+                     "NYVEPRIA",
+                     "PEGFILGRASTIM",
+                     "UDENYCA",
+                     "ZIEXTENZO",
+                     "INTERFERON ALFA-2B",
+                     "INTRON A",
+                     "BETASERON",
+                     "EXTAVIA",
+                     "INTERFERON BETA-1B",
+                     "AVONEX",
+                     "INTERFERON BETA-1A",
+                     "REBIF",
+                     "REBIF REBIDOSE",
+                     "REBIF TITRATION",
+                     "PEGASYS",
+                     "PEGINTERFERON ALFA-2A",
+                     "PEGINTERFERON ALFA-2B",
+                     "PEGINTRON",
+                     "SYLATRON",
+                     "PEGINTERFERON BETA-1A",
+                     "PLEGRIDY",
+                     "PLEGRIDY PEN STARTER PACK",
+                     "PLEGRIDY STARTER PACK",
+                     "ALDESLEUKIN",
+                     "PROLEUKIN",
+                     "NEUMEGA",
+                     "OPRELVEKIN",
+                     "ADAGEN",
+                     "PEGADEMASE BOVINE",
+                     "MOZOBIL",
+                     "PLERIXAFOR",
+                     "PROVENGE",
+                     "SIPULEUCEL-T",
+                     "ELAPEGADEMASE",
+                     "REVCOVI"
+                 ]
+              }
+            ]
+         }'

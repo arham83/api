@@ -1,0 +1,48 @@
+get:
+  tags:
+    - Fetch File 
+  summary: Get Organization  File 
+  description: 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+               name: c-1586186811721-791.yaml
+               path: prognos.ai/admin/c-1586186811721-791.yaml
+               sha: 12a67f39d2f9069fe9f15b878d2629a10d2422a8
+               size: 678
+               url: >-
+                 https://api.github.com/repos/medivo/cohort-repo/contents/prognos.ai/admin/c-1586186811721-791.yaml?ref=master
+               html_url: >-
+                 https://github.com/medivo/cohort-repo/blob/master/prognos.ai/admin/c-1586186811721-791.yaml
+               git_url: >-
+                 https://api.github.com/repos/medivo/cohort-repo/git/blobs/12a67f39d2f9069fe9f15b878d2629a10d2422a8
+               download_url: >-
+                 https://raw.githubusercontent.com/medivo/cohort-repo/master/prognos.ai/admin/c-1586186811721-791.yaml?token=AMOJ5B3DXHJNMTLFYMK7S4LBEOJPS
+               type: file
+               content: "c3RhcnQtZGF0ZTogMTI3MDU2NzYxMTUwMgplbmQtZGF0ZTogMTU4NjE4Njgx\nMTUwMgpkYXRhLXNvdXJjZXM6IFtdCnByb2ZpbGUtbmFtZTogSG9GSCAoUG90\nZW50aWFsKSBQYXRpZW50cwpwcm9maWxlLWRlc2NyaXB0aW9uOiBQYXRpZW50\ncyB3aXRoIGxhYiByZXN1bHRzIChMREwgPj0gNTAwIG1nL2RMKSBzdWdnZXN0\naXZlIG9mIGhvbW96eWdvdXMgZmFtaWxpYWwgaHlwZXJjaG9sZXN0ZXJvbGVt\naWEKcHJvZmlsZS1kZWZpbml0aW9uOiB8LQogIChPUgogICAgKEhBU19NVFJU\nCiAgICAgICJDaG9sZXN0ZXJvbCBpbiBMREwgW01hc3Mvdm9sdW1lXSBpbiBT\nZXJ1bSBvciBQbGFzbWEgYnkgRGlyZWN0IGFzc2F5IgogICAgICA+PSA1MDAK\nICAgICkKICAgIChIQVNfTVRSVAogICAgICAiQ2hvbGVzdGVyb2wgaW4gTERM\nIFtNYXNzL3ZvbHVtZV0gaW4gU2VydW0gb3IgUGxhc21hIgogICAgICA+PSA1\nMDAKICAgICkKICAgIChIQVNfTVRSVAogICAgICAiQ2hvbGVzdGVyb2wuaW4g\nTERMIChyZWFsKSBbTWFzcy92b2x1bWVdIGluIFNlcnVtIG9yIFBsYXNtYSBi\neSBWQVAiCiAgICAgID49IDUwMAogICAgKQogICAgKEhBU19NVFJUCiAgICAg\nICJDaG9sZXN0ZXJvbCBpbiBMREwgW01hc3Mvdm9sdW1lXSBpbiBTZXJ1bSBv\nciBQbGFzbWEgYnkgY2FsY3VsYXRpb24iCiAgICAgID49IDUwMAogICAgKQog\nICkK\n"
+               encoding: base64
+               _links:
+               self: >-
+                 https://api.github.com/repos/medivo/cohort-repo/contents/prognos.ai/admin/c-1586186811721-791.yaml?ref=master
+               git: >-
+                 https://api.github.com/repos/medivo/cohort-repo/git/blobs/12a67f39d2f9069fe9f15b878d2629a10d2422a8
+               html: >-
+                 https://github.com/medivo/cohort-repo/blob/master/prognos.ai/admin/c-1586186811721-791.yaml

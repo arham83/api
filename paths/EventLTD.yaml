@@ -1,0 +1,164 @@
+post:
+  tags:
+    - Event
+  summary: Event Lab Test Data (LOINC)
+  description: This query fetches data from Prognos FACTOR about patients who have undergone lab tests for the index event within date range, which are specified in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 101
+                counteligibility: 99
+                countlab: 16110
+                countmed: 6009
+                countrx: 1445
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-52-26-47-44.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.287µs
+                        bitmap-opt: 1410 of 51933245
+                        query-assign-id: 7.581µs
+                        query-bitmap: 1.56182ms
+                        query-opt: 1.099µs
+                        query-pop-cache: 32.886µs
+                        query-resp: 63.433µs
+                        query-run: 4.343456ms
+                        req-assign-ids: 288ns
+                        token-trans: 698ns
+                      timestamp: 1631079805
+                      version: v1.9.0
+                    - node-designation: 2
+                      node-url: http://ec2-35-167-191-54.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.328µs
+                        bitmap-opt: 1391 of 53471835
+                        query-assign-id: 5.333µs
+                        query-bitmap: 1.794393ms
+                        query-opt: 1.485µs
+                        query-pop-cache: 31.639µs
+                        query-resp: 60.225µs
+                        query-run: 4.253701ms
+                        req-assign-ids: 303ns
+                        token-trans: 713ns
+                      timestamp: 1631080005
+                      version: v1.9.0
+                    - node-designation: 3
+                      node-url: http://ec2-54-184-120-81.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.517µs
+                        bitmap-opt: 1380 of 56267453
+                        query-assign-id: 9.206µs
+                        query-bitmap: 1.885269ms
+                        query-opt: 1.288µs
+                        query-pop-cache: 47.113µs
+                        query-resp: 67.946µs
+                        query-run: 4.294546ms
+                        req-assign-ids: 279ns
+                        token-trans: 960ns
+                      timestamp: 1631079894
+                      version: v1.9.0
+                    - node-designation: 4
+                      node-url: http://ec2-54-213-247-198.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.058µs
+                        bitmap-opt: 1465 of 56258159
+                        query-assign-id: 8.27µs
+                        query-bitmap: 1.89674ms
+                        query-opt: 1.591µs
+                        query-pop-cache: 42.633µs
+                        query-resp: 61.677µs
+                        query-run: 4.509338ms
+                        req-assign-ids: 263ns
+                        token-trans: 730ns
+                      timestamp: 1631079961
+                      version: v1.9.0
+                    - node-designation: 5
+                      node-url: http://ec2-54-202-149-58.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.73µs
+                        bitmap-opt: 1414 of 56252356
+                        query-assign-id: 11.429µs
+                        query-bitmap: 1.77826ms
+                        query-opt: 1.608µs
+                        query-pop-cache: 43.216µs
+                        query-resp: 65.69µs
+                        query-run: 4.305324ms
+                        req-assign-ids: 271ns
+                        token-trans: 722ns
+                      timestamp: 1631080132
+                      version: v1.9.0
+                    - node-designation: 6
+                      node-url: http://ec2-34-221-170-55.us-west-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.135µs
+                        bitmap-opt: 1366 of 49080594
+                        query-assign-id: 6.334µs
+                        query-bitmap: 1.612713ms
+                        query-opt: 1.256µs
+                        query-pop-cache: 35.011µs
+                        query-resp: 61.629µs
+                        query-run: 4.269328ms
+                        req-assign-ids: 763ns
+                        token-trans: 665ns
+                      timestamp: 1631078480
+                      version: v1.9.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EventLTDRQ.yaml
+    description: Schema of Event Lab Test Data (LOINC) API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+          "query":{ 
+                "cmd": "EVENT", 
+                "args":[
+                  {
+                       "cmd": "HAS_MTRT",
+                       "position": "earliest", 
+                       "test": "Body weight"
+                   },
+                   {
+                        "cmd": "INCLUDE", 
+                         "args": [
+                           {
+                                 "cmd": "HAS_MTRT",
+                                 "position": "latest",
+                                 "test": "Basophils [#/volume] in Blood"
+                            } 
+                         ],
+                       "start": -30,
+                       "end": 30
+                    }
+                  ]        
+          },  
+          "aggregate": "count"
+        }'

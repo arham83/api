@@ -1,0 +1,66 @@
+get:
+  tags:
+    - Fetch File List
+  summary: Fetch Organization File List 
+  description: This API requests fetch list of all the yaml files of an organization from cohort repository.<br> 
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                - name: c-1586186811721-791.yaml
+                  path: prognos.ai/admin/c-1586186811721-791.yaml
+                  sha: 12a67f39d2f9069fe9f15b878d2629a10d2422a8
+                  size: 678
+                  url: >-
+                    https://api.github.com/repos/medivo/cohort-repo/contents/prognos.ai/admin/c-1586186811721-791.yaml?ref=master
+                  html_url: >-
+                    https://github.com/medivo/cohort-repo/blob/master/prognos.ai/admin/c-1586186811721-791.yaml
+                  git_url: >-
+                    https://api.github.com/repos/medivo/cohort-repo/git/blobs/12a67f39d2f9069fe9f15b878d2629a10d2422a8
+                  download_url: >-
+                    https://raw.githubusercontent.com/medivo/cohort-repo/master/prognos.ai/admin/c-1586186811721-791.yaml?token=AMOJ5B5H6FRUV2JQVO7JBCLBEM3CO
+                  type: file
+                  _links:
+                    self: >-
+                      https://api.github.com/repos/medivo/cohort-repo/contents/prognos.ai/admin/c-1586186811721-791.yaml?ref=master
+                    git: >-
+                      https://api.github.com/repos/medivo/cohort-repo/git/blobs/12a67f39d2f9069fe9f15b878d2629a10d2422a8
+                    html: >-
+                      https://github.com/medivo/cohort-repo/blob/master/prognos.ai/admin/c-1586186811721-791.yaml
+                - name: c-1586194417389-397.yaml
+                  path: prognos.ai/admin/c-1586194417389-397.yaml
+                  sha: 6277a39101c750a61ddfe6ea0ea46e7ddb7c1cfb
+                  size: 1706
+                  url: >-
+                    https://api.github.com/repos/medivo/cohort-repo/contents/prognos.ai/admin/c-1586194417389-397.yaml?ref=master
+                  html_url: >-
+                    https://github.com/medivo/cohort-repo/blob/master/prognos.ai/admin/c-1586194417389-397.yaml
+                  git_url: >-
+                    https://api.github.com/repos/medivo/cohort-repo/git/blobs/6277a39101c750a61ddfe6ea0ea46e7ddb7c1cfb
+                  download_url: >-
+                    https://raw.githubusercontent.com/medivo/cohort-repo/master/prognos.ai/admin/c-1586194417389-397.yaml?token=AMOJ5B7C6M3UVOAPW3RBTFLBEM3CO
+                  type: file
+                  _links:
+                    self: >-
+                      https://api.github.com/repos/medivo/cohort-repo/contents/prognos.ai/admin/c-1586194417389-397.yaml?ref=master
+                    git: >-
+                      https://api.github.com/repos/medivo/cohort-repo/git/blobs/6277a39101c750a61ddfe6ea0ea46e7ddb7c1cfb
+                    html: >-
+                      https://github.com/medivo/cohort-repo/blob/master/prognos.ai/admin/c-1586194417389-397.yaml

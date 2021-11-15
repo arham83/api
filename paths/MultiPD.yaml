@@ -1,0 +1,156 @@
+post:
+  tags:
+    - Fetch Multiple Data
+  summary:  Fetch Multiple Procedure Data
+  description: This query fetches data from Prognos FACTOR about patients who have been prescribed to undergo multiple medical treatments, which are specified in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 14
+                counteligibility: 32
+                countlab: 120
+                countmed: 22932
+                countrx: 2612
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-18-222-168-147.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 42.675µs
+                        bitmap-opt: 2 of 51986703
+                        query-assign-id: 37.497µs
+                        query-bitmap: 1.560561ms
+                        query-opt: 3.865µs
+                        query-pop-cache: 30.679µs
+                        query-resp: 112.352µs
+                        query-run: 631.954µs
+                        req-assign-ids: 583ns
+                        token-trans: 673ns
+                      timestamp: 1631689017
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-18-118-200-140.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.863µs
+                        bitmap-opt: 4 of 53559225
+                        query-assign-id: 21.998µs
+                        query-bitmap: 1.688048ms
+                        query-opt: 4.201µs
+                        query-pop-cache: 43.159µs
+                        query-resp: 55.532µs
+                        query-run: 305.369µs
+                        req-assign-ids: 1.583µs
+                        token-trans: 927ns
+                      timestamp: 1631689182
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-3-143-25-14.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 12.234µs
+                        bitmap-opt: 3 of 56394806
+                        query-assign-id: 20.505µs
+                        query-bitmap: 1.635612ms
+                        query-opt: 4.119µs
+                        query-pop-cache: 44.16µs
+                        query-resp: 61.644µs
+                        query-run: 197.446µs
+                        req-assign-ids: 1.854µs
+                        token-trans: 640ns
+                      timestamp: 1631689152
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-21-43-238.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.896µs
+                        bitmap-opt: 3 of 56385394
+                        query-assign-id: 37.916µs
+                        query-bitmap: 1.617332ms
+                        query-opt: 4.218µs
+                        query-pop-cache: 49.773µs
+                        query-resp: 57.436µs
+                        query-run: 359.41µs
+                        req-assign-ids: 1.715µs
+                        token-trans: 640ns
+                      timestamp: 1631689515
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-18-117-142-247.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.789µs
+                        bitmap-opt: 2 of 56378687
+                        query-assign-id: 46.056µs
+                        query-bitmap: 1.595875ms
+                        query-opt: 4.472µs
+                        query-pop-cache: 33.945µs
+                        query-resp: 71.622µs
+                        query-run: 517.019µs
+                        req-assign-ids: 935ns
+                        token-trans: 590ns
+                      timestamp: 1631689217
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-52-14-31-151.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.855µs
+                        bitmap-opt: 2 of 49207840
+                        query-assign-id: 17.19µs
+                        query-bitmap: 1.518655ms
+                        query-opt: 4.013µs
+                        query-pop-cache: 36.717µs
+                        query-resp: 44.939µs
+                        query-run: 130.067µs
+                        req-assign-ids: 566ns
+                        token-trans: 640ns
+                      timestamp: 1631687450
+                      version: v1.8.0
+
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/MultiPDRQ.yaml
+    description: Schema of Fetch Multiple Procedure Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"AND",
+                 "args":[
+                   {
+                       "cmd":"HAS_RX",
+                       "code": "00100"
+                    },
+                    {
+                       "cmd":"HAS_RX",
+                       "code": "00102"
+                    }
+                        ]
+               },
+            "aggregate":"count"
+          }'

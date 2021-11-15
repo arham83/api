@@ -1,0 +1,71 @@
+post:
+  tags:
+    - Uncategorized
+  summary: Get Exclusions
+  description: This query request excul the all data which we fetched from Prognos FACTOR about patients history who have been prescribed to undergo multiple medical treatments, lab test and Etc.
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                Account: 8bb27f5acd1e44f98df5f58a8f6acaa3
+                Tests:
+                  - >-
+                    Complement C1 esterase inhibitor.functional/Complement C1 esterase
+                    inhibitor.total in Serum or Plasma
+                  - Complement C1 esterase inhibitor [Mass/volume] in Serum or Plasma
+                  - Complement C1 esterase inhibitor.functional [Mass/volume] in Serum or Plasma
+                  - Diagnosis ICD code
+                  - Pathologist who read Cyto stain of Cervical or vaginal smear or scraping
+                  - CD59 RBC/100 erythrocytes in Blood
+                  - Cystic fibrosis newborn screening panel
+                  - Race
+                  - Reference lab test results
+                  - Toxicologist review of results
+                  - Pathologist interpretation of Blood tests
+                  - ZIP code
+                  - Diagnosis recommendations Set CPHS
+                  - Patient history
+                  - XXX NULL
+                  - Reference lab test method
+                  - CD59 deficient monocytes/100 cells in Blood
+                  - Pathologist interpretation of Blood tests [Hepatitis]
+                  - Hematologist review of results
+                  - Age calculated
+                  - Pathologist name
+                  - Internal identifier for Provider
+                  - Reference lab test name   
+                  - Age
+                  - Cystic fibrosis newborn screen interpretation
+                  - Mother's race
+                  - Birth date
+                  - Pathologist review of results
+                  - Cystic fibrosis newborn screening comment-discussion
+                  - Unique identifier for Current sample
+                  - Specific gravity of Urine
+                  - Pathologist review of Blood tests
+                  - >-
+                   Reviewing cytologist who read Cyto stain of Cervical or vaginal smear or
+                   scraping
+                  - Pathology report comments [Interpretation] Narrative
+                  - Reference lab test reference range
+                  - Specimen type
+                  - Date reference lab test sent
+                  - Laboratory director name in Provider
+                  - Laboratory comment [Text] in Report Narrative

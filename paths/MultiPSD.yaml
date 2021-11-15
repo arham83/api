@@ -1,0 +1,155 @@
+post:
+  tags:
+    - Fetch Multiple Data
+  summary:  Fetch Multiple Provider Specialty Data 
+  description: This query fetches data from Prognos FACTOR about patients who are visiting multiple medical specialists, all of whom are specified in the query body. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 62064753
+                counteligibility: 107634730
+                countlab: 3575824650
+                countmed: 16300686130
+                countrx: 3892797562
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-18-222-168-147.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.214µs
+                        bitmap-opt: 15397271 of 51986703
+                        query-assign-id: 6.662µs
+                        query-bitmap: 40.09449ms
+                        query-opt: 5.186µs
+                        query-pop-cache: 38.047µs
+                        query-resp: 1.775343885s
+                        query-run: 3.718677631s
+                        req-assign-ids: 1.625µs
+                        token-trans: 632ns
+                      timestamp: 1631689017
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-18-118-200-140.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.707µs
+                        bitmap-opt: 15460049 of 53559225
+                        query-assign-id: 10.191µs
+                        query-bitmap: 108.969156ms
+                        query-opt: 6.317µs
+                        query-pop-cache: 58.576µs
+                        query-resp: 1.75302763s
+                        query-run: 3.775876012s
+                        req-assign-ids: 2.732µs
+                        token-trans: 665ns
+                      timestamp: 1631689182
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-3-143-25-14.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.665µs
+                        bitmap-opt: 15656103 of 56394806
+                        query-assign-id: 8.582µs
+                        query-bitmap: 40.961835ms
+                        query-opt: 7.098µs
+                        query-pop-cache: 51.306µs
+                        query-resp: 1.773697802s
+                        query-run: 3.699873102s
+                        req-assign-ids: 2.445µs
+                        token-trans: 632ns
+                      timestamp: 1631689152
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-21-43-238.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.493µs
+                        bitmap-opt: 15584393 of 56385394
+                        query-assign-id: 11.126µs
+                        query-bitmap: 40.799752ms
+                        query-opt: 6.195µs
+                        query-pop-cache: 56.771µs
+                        query-resp: 1.735822074s
+                        query-run: 3.661574652s
+                        req-assign-ids: 2.462µs
+                        token-trans: 853ns
+                      timestamp: 1631689515
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-18-117-142-247.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.217µs
+                        bitmap-opt: 15607329 of 56378687
+                        query-assign-id: 9.132µs
+                        query-bitmap: 42.359938ms
+                        query-opt: 7.097µs
+                        query-pop-cache: 56.623µs
+                        query-resp: 1.720267986s
+                        query-run: 3.663271991s
+                        req-assign-ids: 2.125µs
+                        token-trans: 624ns
+                      timestamp: 1631689217
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-52-14-31-151.us-east-2.compute.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.214µs
+                        bitmap-opt: 13244116 of 49207840
+                        query-assign-id: 8.87µs
+                        query-bitmap: 34.379565ms
+                        query-opt: 6.646µs
+                        query-pop-cache: 52.48µs
+                        query-resp: 1.553360724s
+                        query-run: 3.223293612s
+                        req-assign-ids: 2.093µs
+                        token-trans: 632ns
+                      timestamp: 1631687450
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/MultiPSDRQ.yaml
+    description: Schema of Fetch Multiple Drug Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"AND",
+                 "args":[
+                   {
+                       "cmd":"HAS_PROVSPEC",
+                       "provspec": "FAMILY PRACTICE"
+                    },
+                    {
+                        "cmd":"HAS_PROVSPEC",
+                        "provspec": "NURSING"
+                    }
+                        ]
+               },
+            "aggregate":"count"
+          }'

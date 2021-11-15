@@ -1,0 +1,73 @@
+post:
+  tags:
+    - Aggregate
+  summary: Query First Match
+  description: In case of firstmatch the query will return the list of patients who have undergone a specific test specified in the query, where each patient entry contain 2 fields<br>
+
+    <ol><li>Number of days since January, 2010 to the date of test</li>
+
+    <li>A unique token termed as TOKEN4S</li></ol>  
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                page: 1
+                pages: 11
+                patients:
+                  - fm: 3546
+                    t4: >-
+                      Gz/iAc84rUQ5988JbnUbirlJtGyxXAHivGTVPkg33O4=-22ZYoIq4kWVtrUj/l4oyEB1j+VRaCT6DZSrJ9/iJOv8=
+                  - fm: 3001
+                    t4: >-
+                      HREz/j+N+trTJ7JwQ+BExMG0SVtZFwPS+HExwax80EA=-OfRuRTpa5m4E+um/2bTV5ElwoWky8yklsJ93T9T5RI4=
+                  - >- 
+                    . 
+                  - >- 
+                    .
+                  - >- 
+                    .
+                  - fm: 3534
+                    t4: >-
+                      lFLmwUBwBzG10s4ynBg/bTxnYOsKXllzED0dlevTVcY=-ygBbStTA/dprg4NmAyqC9P2C+592W3mvRKUMIGVzQ9E=
+                  - fm: 3640
+                    t4: >-
+                      jPBbish+6jCPiFLdrP6qvkNz5hY6RHc1CvhRObAGC4U=-xda4otnrDA49ni2jbF7tRsEb6xapxH8T4AjcR12xHnY=
+               
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/firstmatchRQ.yaml
+    description: Schema of Query First Match API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_MTRT",
+                "test": "Body weight"
+                },
+            "aggregate": "firstmatch"
+        }'

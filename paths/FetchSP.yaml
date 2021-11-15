@@ -1,0 +1,146 @@
+post:
+  tags:
+    - Fetch Single Data
+  summary: Fetch Single Procedure
+  description: This query fetches data from Prognos FACTOR about patients who have been prescribed a medical treatment, as specified in the query body.
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: calls per hour allowed by the user
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 48714
+                counteligibility: 117728
+                countlab: 2401363
+                countmed: 27825970
+                countrx: 4599772
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.304µs
+                        bitmap-opt: 14399 of 52348262
+                        query-assign-id: 11.11µs
+                        query-bitmap: 1.579806ms
+                        query-opt: 1.099µs
+                        query-pop-cache: 36.456µs
+                        query-resp: 2.682821ms
+                        query-run: 201.318058ms
+                        req-assign-ids: 2.035µs
+                        token-trans: 631ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.854µs
+                        bitmap-opt: 14096 of 53875464
+                        query-assign-id: 11.652µs
+                        query-bitmap: 1.624241ms
+                        query-opt: 1.51µs
+                        query-pop-cache: 41.124µs
+                        query-resp: 2.85661ms
+                        query-run: 198.208272ms
+                        req-assign-ids: 1.985µs
+                        token-trans: 681ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.394µs
+                        bitmap-opt: 13994 of 56700766
+                        query-assign-id: 10.56µs
+                        query-bitmap: 1.597289ms
+                        query-opt: 1.182µs
+                        query-pop-cache: 35.323µs
+                        query-resp: 2.746299ms
+                        query-run: 193.575428ms
+                        req-assign-ids: 1.616µs
+                        token-trans: 640ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.897µs
+                        bitmap-opt: 14031 of 56689568
+                        query-assign-id: 10.56µs
+                        query-bitmap: 1.640408ms
+                        query-opt: 1.239µs
+                        query-pop-cache: 40.78µs
+                        query-resp: 2.446655ms
+                        query-run: 194.187273ms
+                        req-assign-ids: 1.797µs
+                        token-trans: 673ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 8.919µs
+                        bitmap-opt: 13946 of 56685649
+                        query-assign-id: 27.028µs
+                        query-bitmap: 1.621649ms
+                        query-opt: 1.288µs
+                        query-pop-cache: 34.453µs
+                        query-resp: 2.406627ms
+                        query-run: 195.452589ms
+                        req-assign-ids: 2.092µs
+                        token-trans: 665ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.608µs
+                        bitmap-opt: 11672 of 49511159
+                        query-assign-id: 10.584µs
+                        query-bitmap: 1.356368ms
+                        query-opt: 1.116µs
+                        query-pop-cache: 37.464µs
+                        query-resp: 2.035443ms
+                        query-run: 179.49401ms
+                        req-assign-ids: 1.781µs
+                        token-trans: 648ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/FetchSPschema.yaml
+    description: Schema of Fetch Single Procedure API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd": "HAS_RX",
+                "code": "00100"
+                },
+            "aggregate": "count"
+        }'

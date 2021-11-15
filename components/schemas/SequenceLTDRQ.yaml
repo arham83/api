@@ -1,0 +1,30 @@
+type: object
+properties:
+    query: 
+      type: object
+      description: This part contains information related to query that helps to fetch patient data under certain constraints.  
+      properties:
+          cmd:
+            type: string
+            description: This value for this key specify the clause that will be utilized to fetch a certain type of data. In case of `HAS_MTRT`, this value is used to list patients who have undergone a single test.  
+            example:
+              AND
+          args:
+            type: string
+            description: This value is used to define the name of a particular or specified test.
+            example:
+                - cmd: HAS_MTRT
+                  position: earliest
+                  test: Body weight
+                - cmd: HAS_MTRT
+                  position: latest
+                  test: Basophils [#/volume] in Blood      
+                  timerelation: before
+                  timedays: 30      
+    aggregate:
+      type: string
+      description: This is the return type of a given API request. In case of `count` the query returns the number of patients.
+      example:
+        count
+ 
+    

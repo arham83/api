@@ -1,0 +1,15 @@
+type: object
+properties:
+    sha: 
+      type: object
+      description: This part contains information related to query that helps to fetch patient data under certain constraints.  
+      example: 
+        07672ff67b42bbb5f0925733b05286e7271e7767
+    message: 
+      type: object
+      description: This part contains information related to query that helps to fetch patient data under certain constraints. 
+      example:
+       "delete file"              
+
+
+    

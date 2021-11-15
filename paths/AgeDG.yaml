@@ -1,0 +1,141 @@
+post:
+  tags:
+    - Fetch by Demographics Data
+  summary: Age
+  description: This query fetches patient data on the base of their age from Prognos FACTOR. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 260664257
+                counteligibility: 236439196
+                countlab: 13123275183
+                countmed: 27229599001
+                countrx: 6561810672
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 33.65µs
+                        bitmap-opt: 52408159 of 52408159
+                        query-assign-id: 3.348µs
+                        query-bitmap: 98.857305ms
+                        query-opt: 1.313µs
+                        query-pop-cache: 903.90874ms
+                        query-resp: 4.068270465s
+                        req-assign-ids: 1.132µs
+                        token-trans: 648ns
+                      timestamp: 1630477869
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 34.338µs
+                        bitmap-opt: 54002848 of 54002848
+                        query-assign-id: 3.84µs
+                        query-bitmap: 100.664918ms
+                        query-opt: 1.305µs
+                        query-pop-cache: 931.779272ms
+                        query-resp: 4.471990182s
+                        req-assign-ids: 1.321µs
+                        token-trans: 623ns
+                      timestamp: 1630478334
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 32.64µs
+                        bitmap-opt: 56901342 of 56901342
+                        query-assign-id: 3.216µs
+                        query-bitmap: 104.550746ms
+                        query-opt: 1.715µs
+                        query-pop-cache: 988.594923ms
+                        query-resp: 4.711204954s
+                        req-assign-ids: 1.575µs
+                        token-trans: 616ns
+                      timestamp: 1630478321
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 33.904µs
+                        bitmap-opt: 56890508 of 56890508
+                        query-assign-id: 3.824µs
+                        query-bitmap: 104.372277ms
+                        query-opt: 1.55µs
+                        query-pop-cache: 993.220643ms
+                        query-resp: 4.738965004s
+                        req-assign-ids: 1.387µs
+                        token-trans: 648ns
+                      timestamp: 1630478510
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 37.325µs
+                        bitmap-opt: 56886507 of 56886507
+                        query-assign-id: 3.897µs
+                        query-bitmap: 104.630302ms
+                        query-opt: 1.239µs
+                        query-pop-cache: 990.374549ms
+                        query-resp: 4.488029738s
+                        req-assign-ids: 1.255µs
+                        token-trans: 969ns
+                      timestamp: 1630478557
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 33.156µs
+                        bitmap-opt: 49712198 of 49712198
+                        query-assign-id: 3.824µs
+                        query-bitmap: 75.576422ms
+                        query-opt: 1.37µs
+                        query-pop-cache: 872.780018ms
+                        query-resp: 4.371413987s
+                        req-assign-ids: 1.313µs
+                        token-trans: 656ns
+                      timestamp: 1630476622
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/AgeDGRQ.yaml
+    description: Schema of Fetch Age Demographics Data API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"AGE_IS",
+                "op":">",
+                "number":20
+              },
+            "aggregate": "count"
+          }'

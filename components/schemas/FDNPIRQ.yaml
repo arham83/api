@@ -1,0 +1,10 @@
+type: object
+properties:
+    npi: 
+      type: object
+      description: This part contains information related to patient history with repect to their `npi` (National Provider Identifier).  
+      example:
+         - '1649375759'
+         
+
+     

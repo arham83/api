@@ -1,0 +1,155 @@
+post:
+  tags:
+    - Logic
+  summary:  AND Logic 
+  description: This query act as a logical AND over several sub-queries and fetches data about all the patients who satisfy all of the sub-queries contained in the argument body of main query. <br>
+  operationId: 
+  security:
+    - Authorization Token: []
+  responses:
+    '200':
+      description: OK
+      headers:
+        X-Rate-Limit:
+          description: Number of Patients
+          schema:
+            type: integer
+            format: int32
+        X-Expires-After:
+          $ref: ../components/headers/ExpiresAfter.yaml
+      content:
+        application/json:
+          schema:
+            type: string
+          examples:
+            response:
+              value:
+                count: 52763
+                counteligibility: 126630
+                countlab: 11492260
+                countmed: 51734263
+                countrx: 12479680
+                stats:
+                  node-count: 6
+                  nodes:
+                    - node-designation: 1
+                      node-url: http://ec2-3-239-52-198.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.749µs
+                        bitmap-opt: 22978 of 52348262
+                        query-assign-id: 13.112µs
+                        query-bitmap: 2.16703ms
+                        query-opt: 5.653µs
+                        query-pop-cache: 42.412µs
+                        query-resp: 4.567315ms
+                        query-run: 503.371021ms
+                        req-assign-ids: 1.887µs
+                        token-trans: 591ns
+                      timestamp: 1629834763
+                      version: v1.8.0
+                    - node-designation: 2
+                      node-url: http://ec2-3-239-206-199.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 11.693µs
+                        bitmap-opt: 20484 of 53875464
+                        query-assign-id: 11.955µs
+                        query-bitmap: 2.073244ms
+                        query-opt: 5.834µs
+                        query-pop-cache: 30.408µs
+                        query-resp: 3.949321ms
+                        query-run: 479.12956ms
+                        req-assign-ids: 1.345µs
+                        token-trans: 599ns
+                      timestamp: 1629835002
+                      version: v1.8.0
+                    - node-designation: 3
+                      node-url: http://ec2-18-235-3-151.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.314µs
+                        bitmap-opt: 20726 of 56700766
+                        query-assign-id: 13.505µs
+                        query-bitmap: 2.236574ms
+                        query-opt: 6.023µs
+                        query-pop-cache: 34.797µs
+                        query-resp: 4.276421ms
+                        query-run: 484.966058ms
+                        req-assign-ids: 1.961µs
+                        token-trans: 615ns
+                      timestamp: 1629835196
+                      version: v1.8.0
+                    - node-designation: 4
+                      node-url: http://ec2-3-238-15-180.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.314µs
+                        bitmap-opt: 20700 of 56689568
+                        query-assign-id: 13.399µs
+                        query-bitmap: 2.308218ms
+                        query-opt: 5.859µs
+                        query-pop-cache: 40.287µs
+                        query-resp: 4.263851ms
+                        query-run: 488.031142ms
+                        req-assign-ids: 1.871µs
+                        token-trans: 608ns
+                      timestamp: 1629835044
+                      version: v1.8.0
+                    - node-designation: 5
+                      node-url: http://ec2-3-226-249-115.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 10.535µs
+                        bitmap-opt: 20486 of 56685649
+                        query-assign-id: 13.653µs
+                        query-bitmap: 2.280375ms
+                        query-opt: 5.645µs
+                        query-pop-cache: 37.661µs
+                        query-resp: 5.217311ms
+                        query-run: 478.886255ms
+                        req-assign-ids: 1.879µs
+                        token-trans: 927ns
+                      timestamp: 1629835473
+                      version: v1.8.0
+                    - node-designation: 6
+                      node-url: http://ec2-18-205-7-105.compute-1.amazonaws.com:5000
+                      perf:
+                        acc-ctrl: 9.009µs
+                        bitmap-opt: 20572 of 49511159
+                        query-assign-id: 12.809µs
+                        query-bitmap: 1.91048ms
+                        query-opt: 4.947µs
+                        query-pop-cache: 28.308µs
+                        query-resp: 3.773888ms
+                        query-run: 486.499944ms
+                        req-assign-ids: 1.174µs
+                        token-trans: 615ns
+                      timestamp: 1629833269
+                      version: v1.8.0
+                
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ANDlogicRQ.yaml
+    description: Schema of AND Logic API request
+    required: true
+  x-codeSamples:
+    - lang: 'cURL'
+      label: 'CLI'
+      source: |
+        curl --location --request POST 'il1.prognosfactor.com/query' \
+        --header 'Authorization: <AUTH TOKEN>' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "query":{
+                "cmd":"AND",
+                 "args":[
+                   {
+                       "cmd":"HAS_MTRT",
+                       "test":"Body weight"
+                    },
+                    {
+                       "cmd":"HAS_MTRT",
+                       "test":"Hemoglobin A1c/Hemoglobin.total in Blood"
+                    }
+                        ]
+               },
+            "aggregate":"count"
+          }'
